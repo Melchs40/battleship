@@ -95,7 +95,17 @@ export default class Gameboard {
         } else if (x == board[i][0] && y == board[i][1]) {
           board[i][2].hit();
           board[i][2].isSunk();
-          if (board[i][2].sunk == true) {
+          let checkWin = [];
+          for (let i = 0; i < board.length; i++) {
+            if (typeof board[i][2] == 'object') {
+              checkWin.push('ship');
+            }
+          }
+          if (checkWin.length == 1) {
+            board[i][2] = 'hit';
+            checkWin = [];
+            return "You've sunk their last ship, captain! The war is over!";
+          } else if (board[i][2].sunk == true) {
             board[i][2] = 'hit';
             return "You've sunk my battleship!";
           } else board[i][2] = 'hit';
