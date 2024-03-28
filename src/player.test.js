@@ -27,7 +27,7 @@ test('test if takeTurn function correctly hits, misses, sinks on gameboard', () 
     );
   expect(player.takeTurn()).toBe('hit');
   expect(player.takeTurn()).toBe('miss');
-  expect(player.takeTurn()).toBe("You've sunk my battleship!");
+  expect(player.takeTurn()).toBe("You've sunk their battleship!");
   expect(player.takeTurn()).toBe(
     "You've sunk their last ship, captain! The war is over!"
   );

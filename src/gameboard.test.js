@@ -44,7 +44,7 @@ test('check if attacks return proper value for hits, misses, and invalid locatio
   expect(newBoard.receiveAttack(1, 8)).toBe('miss');
   expect(newBoard.receiveAttack(1, 6)).toBe('Cannot fire here, captain!');
   expect(newBoard.receiveAttack(1, 17)).toBe('Cannot fire here, captain!');
-  expect(newBoard.receiveAttack(1, 5)).toBe("You've sunk my battleship!");
+  expect(newBoard.receiveAttack(1, 5)).toBe("You've sunk their battleship!");
 });
 
 test('check if all ships have been sunk on the gameboard', () => {

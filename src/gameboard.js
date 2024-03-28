@@ -107,7 +107,7 @@ export default class Gameboard {
             return "You've sunk their last ship, captain! The war is over!";
           } else if (board[i][2].sunk == true) {
             board[i][2] = 'hit';
-            return "You've sunk my battleship!";
+            return "You've sunk their battleship!";
           } else board[i][2] = 'hit';
           return board[i][2];
         }
