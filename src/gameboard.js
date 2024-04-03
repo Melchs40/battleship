@@ -114,3 +114,28 @@ export default class Gameboard {
       }
   }
 }
+
+//I do believe you missed their ships, sir.
+//Miss. We must be getting close to one, captain.
+//Captain, we can't afford to keep missing like this.
+//We've missed. Where must their ships be?
+
+//You gotten a hit, captain!
+//Brilliant shot!
+//A hit, we've got them on their heels now.
+//Bloody good hit.
+
+//More of those and this war will be done in no time!
+//Captain, you've sunk one of their ships!
+//Their ship appears to be sunk, sir.
+//This will turn the tide of battle, lets sink another.
+
+//You've sunk their last ship, captain! The war is over!
+//That's their last one, we can finally go home!
+//They're waving the white flag, sir. Victory!
+//We'll be remembered forever as heroes, Captain!
+
+//Our last ship is sunk. Captain, it's been an honor.
+//Oh no! That was our last ship, captain!
+//We fought to the bitter end.
+//We must abandon ship, we've lost the battle.

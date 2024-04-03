@@ -1,10 +1,124 @@
+body {
+  margin: 0;
+  font-family: "Share Tech Mono", monospace;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.ui {
+  position: relative;
+  z-index: 1;
+  display: flex;
+}
+
+#title {
+  text-align: center;
+  font-size: 64px;
+  color: rgb(17, 102, 17);
+}
+
+#intro {
+  text-align: center;
+  font-size: 24px;
+  width: 85%;
+  color: rgb(17, 102, 17);
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  border-right: 0.15em solid transparent; /* The typwriter cursor */
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  letter-spacing: 0.15em; /* Adjust as needed */
+  animation: typing 6s steps(40, end), blink-caret 0.75s step-end 8;
+}
+
+#input-name {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  color: rgb(1, 16, 4);
+  border: none;
+  background-color: rgb(17, 102, 17);
+  font-family: "Share Tech Mono", monospace;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 24px;
+  width: 100px;
+  margin-left: 10px;
+}
+
+#start {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border: none;
+  color: rgb(17, 102, 17);
+  border: 1px solid rgb(17, 102, 17);
+  background-color: rgb(1, 16, 4);
+  font-family: "Share Tech Mono", monospace;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 24px;
+  margin-left: 10px;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 85%;
+  }
+}
+@keyframes blink-caret {
+  from, to {
+    border-color: transparent;
+  }
+  50% {
+    border-right: 0.15em solid rgb(17, 102, 17);
+  }
+}
+#game-container {
+  padding-top: 10vh;
+  height: 600px;
+  width: 100vw;
+  display: flex;
+  justify-content: space-around;
+}
+
+.containers {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+  width: 45%;
+}
+
+#computer-board,
+#player-board {
+  display: flex;
+  flex-wrap: wrap;
+  height: 400px;
+  width: 400px;
+  border: 1px solid yellow;
+  background-color: rgb(1, 16, 4);
+}
+
+.square {
+  height: 38px;
+  width: 38px;
+  border: 1px solid gray;
+  background-color: white;
+}
+
 .background {
+  position: absolute;
+  top: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   width: 100vw;
   background-color: rgb(1, 16, 4);
+  z-index: -1;
 }
 
 #first {
@@ -12,6 +126,7 @@
   justify-content: center;
   align-items: center;
   height: 60vh;
+  margin-top: 60px;
   border: 3px dashed rgb(17, 102, 17);
   aspect-ratio: 1/1;
 }
@@ -81,8 +196,8 @@
   color: pink;
   background-color: rgb(17, 102, 17);
   z-index: 2;
-  bottom: calc(50% - 8px);
-  left: calc(50% + 6px);
+  bottom: calc(50% - 30px);
+  left: calc(50% + 0px);
   transform-origin: bottom center;
   animation: spin 8s linear infinite;
 }

@@ -1,6 +1,81 @@
 import './style.css';
+import Gameboard from './gameboard';
+import Ship from './ships';
+import Player from './player';
 
 let content = document.getElementById('content');
+
+//create the user interface
+let ui = document.createElement('div');
+ui.classList.add('interface');
+
+let title = document.createElement('header');
+title.innerHTML = 'Battleship';
+title.setAttribute('id', 'title');
+
+let intro = document.createElement('div');
+intro.innerHTML = 'Welcome to the resistance. What is your name, Captain?';
+intro.setAttribute('id', 'intro');
+
+let input = document.createElement('input');
+input.type = 'text';
+input.setAttribute('id', 'input-name');
+intro.appendChild(input);
+
+let startButton = document.createElement('button');
+startButton.setAttribute('id', 'start');
+startButton.innerHTML = 'START';
+intro.appendChild(startButton);
+startButton.addEventListener('click', function () {
+  createPlayerBoard();
+  createComputerBoard();
+});
+
+let gameBoards = document.createElement('div');
+gameBoards.setAttribute('id', 'game-container');
+
+let playerContainer = document.createElement('div');
+playerContainer.setAttribute('id', 'player-container');
+playerContainer.classList.add('containers');
+
+let playerBoard = document.createElement('div');
+playerBoard.setAttribute('id', 'player-board');
+playerContainer.appendChild(playerBoard);
+
+function createPlayerBoard() {
+  for (let i = 0; i < 100; i++) {
+    let square = document.createElement('div');
+    square.classList.add('square');
+    square.classList.add('player-square');
+    playerBoard.appendChild(square);
+  }
+}
+
+let computerContainer = document.createElement('div');
+computerContainer.setAttribute('id', 'computer-container');
+computerContainer.classList.add('containers');
+
+let computerBoard = document.createElement('div');
+computerBoard.setAttribute('id', 'computer-board');
+computerContainer.appendChild(computerBoard);
+
+function createComputerBoard() {
+  for (let i = 0; i < 100; i++) {
+    let square = document.createElement('div');
+    square.classList.add('square');
+    square.classList.add('computer-square');
+    computerBoard.appendChild(square);
+  }
+}
+
+content.appendChild(ui);
+ui.appendChild(title);
+ui.appendChild(intro);
+ui.appendChild(gameBoards);
+gameBoards.appendChild(playerContainer);
+gameBoards.appendChild(computerContainer);
+
+//creates background image
 let background = document.createElement('div');
 background.classList.add('background');
 
