@@ -5,6 +5,10 @@ import Player from './player';
 
 let content = document.getElementById('content');
 
+let user = '';
+let pcUser = '';
+let testLength = 3;
+
 //create the user interface
 let ui = document.createElement('div');
 ui.classList.add('interface');
@@ -14,7 +18,7 @@ title.innerHTML = 'Battleship';
 title.setAttribute('id', 'title');
 
 let intro = document.createElement('div');
-intro.innerHTML = 'Welcome to the resistance. What is your name, Captain?';
+intro.innerHTML = 'Welcome to the war. What is your name, Captain?';
 intro.setAttribute('id', 'intro');
 
 let input = document.createElement('input');
@@ -27,8 +31,17 @@ startButton.setAttribute('id', 'start');
 startButton.innerHTML = 'START';
 intro.appendChild(startButton);
 startButton.addEventListener('click', function () {
+  let player = new Player(input.value);
+  player.startGame();
+  playerBoard.style.visibility = 'visible';
   createPlayerBoard();
+  let player2 = new Player('PC');
+  player2.startGame();
+  computerBoard.style.visibility = 'visible';
   createComputerBoard();
+  console.log(player.board);
+  user = player;
+  pcUser = player2;
 });
 
 let gameBoards = document.createElement('div');
@@ -40,13 +53,18 @@ playerContainer.classList.add('containers');
 
 let playerBoard = document.createElement('div');
 playerBoard.setAttribute('id', 'player-board');
+playerBoard.style.visibility = 'hidden';
 playerContainer.appendChild(playerBoard);
 
 function createPlayerBoard() {
   for (let i = 0; i < 100; i++) {
-    let square = document.createElement('div');
+    let square = document.createElement('button');
     square.classList.add('square');
     square.classList.add('player-square');
+    square.setAttribute('id', 'player-' + i);
+    square.addEventListener('click', function () {
+      console.log(square.id);
+    });
     playerBoard.appendChild(square);
   }
 }
@@ -57,13 +75,27 @@ computerContainer.classList.add('containers');
 
 let computerBoard = document.createElement('div');
 computerBoard.setAttribute('id', 'computer-board');
+computerBoard.style.visibility = 'hidden';
 computerContainer.appendChild(computerBoard);
 
 function createComputerBoard() {
   for (let i = 0; i < 100; i++) {
-    let square = document.createElement('div');
+    let square = document.createElement('button');
     square.classList.add('square');
     square.classList.add('computer-square');
+    square.setAttribute('id', 'computer-' + i);
+    square.addEventListener('click', function () {
+      console.log(
+        pcUser.game.receiveAttack(
+          pcUser.game.board[i][0],
+          pcUser.game.board[i][1]
+        )
+      );
+      square.id = 'hit';
+      if (pcUser.game.board[i][2] == 'hit') {
+        square.innerHTML = 'X';
+      } else square.innerHTML = '-';
+    });
     computerBoard.appendChild(square);
   }
 }
@@ -117,5 +149,3 @@ fourthCircle.appendChild(fifthCircle);
 firstCircle.appendChild(vLine);
 firstCircle.appendChild(hLine);
 firstCircle.appendChild(moveLine);
-
-console.log('hello');
