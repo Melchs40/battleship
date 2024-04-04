@@ -21,7 +21,7 @@ test('test if takeTurn function correctly hits, misses, sinks on gameboard', () 
     .spyOn(player.game, 'receiveAttack')
     .mockReturnValueOnce('hit')
     .mockReturnValueOnce('miss')
-    .mockReturnValueOnce("You've sunk my battleship!")
+    .mockReturnValueOnce("You've sunk their battleship!")
     .mockReturnValueOnce(
       "You've sunk their last ship, captain! The war is over!"
     );

@@ -8,13 +8,13 @@ export default class Gameboard {
   createBoard() {
     let board = [];
     let boardSize = 10;
+    let k = 0;
 
     for (let i = 1; i <= boardSize; i++) {
       for (let j = 1; j <= boardSize; j++) {
-        board.push([i, j, 'empty']);
+        board.push([i, j, 'empty', k++]);
       }
     }
-
     this.board = board;
   }
 
@@ -81,37 +81,37 @@ export default class Gameboard {
     let board = this.board;
     if (x < 0 || x > 10 || y < 0 || y > 10) {
       return 'Cannot fire here, captain!';
-    } else
-      for (let i = 0; i < board.length; i++) {
-        if (x == board[i][0] && y == board[i][1] && board[i][2] == 'empty') {
-          board[i][2] = 'miss';
-          return board[i][2];
-        } else if (
-          x == board[i][0] &&
-          y == board[i][1] &&
-          (board[i][2] == 'hit' || board[i][2] == 'miss')
-        ) {
-          return 'Cannot fire here, captain!';
-        } else if (x == board[i][0] && y == board[i][1]) {
-          board[i][2].hit();
-          board[i][2].isSunk();
-          let checkWin = [];
-          for (let i = 0; i < board.length; i++) {
-            if (typeof board[i][2] == 'object') {
-              checkWin.push('ship');
-            }
+    } else console.log([x, y]);
+    for (let i = 0; i < board.length; i++) {
+      if (x == board[i][0] && y == board[i][1] && board[i][2] == 'empty') {
+        board[i][2] = 'miss';
+        return board[i][2];
+      } else if (
+        x == board[i][0] &&
+        y == board[i][1] &&
+        (board[i][2] == 'hit' || board[i][2] == 'miss')
+      ) {
+        return 'Cannot fire here, captain!';
+      } else if (x == board[i][0] && y == board[i][1]) {
+        board[i][2].hit();
+        board[i][2].isSunk();
+        let checkWin = [];
+        for (let i = 0; i < board.length; i++) {
+          if (typeof board[i][2] == 'object') {
+            checkWin.push('ship');
           }
-          if (checkWin.length == 1) {
-            board[i][2] = 'hit';
-            checkWin = [];
-            return "You've sunk their last ship, captain! The war is over!";
-          } else if (board[i][2].sunk == true) {
-            board[i][2] = 'hit';
-            return "You've sunk their battleship!";
-          } else board[i][2] = 'hit';
-          return board[i][2];
         }
+        if (checkWin.length == 1) {
+          board[i][2] = 'hit';
+          checkWin = [];
+          return "You've sunk their last ship, captain! The war is over!";
+        } else if (board[i][2].sunk == true) {
+          board[i][2] = 'hit';
+          return "You've sunk their battleship!";
+        } else board[i][2] = 'hit';
+        return board[i][2];
       }
+    }
   }
 }
 

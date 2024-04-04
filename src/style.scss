@@ -96,15 +96,15 @@ body {
 #player-board {
   display: flex;
   flex-wrap: wrap;
-  height: 400px;
-  width: 400px;
+  height: 320px;
+  width: 320px;
   border: none;
   background-color: rgb(1, 16, 4);
 }
 
 .square {
-  height: 40px;
-  width: 40px;
+  height: 32px;
+  width: 32px;
   border: 1px solid rgb(17, 102, 17);
   background-color: rgb(1, 16, 4);
   color: rgb(17, 102, 17);
@@ -288,6 +288,10 @@ body {
 }
 
 #hit {
-  background-color: rgb(2, 23, 7);
+  background-color: yellow;
   color: rgb(17, 102, 17);
+  font-family: 'Share Tech Mono', monospace;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 20px;
 }

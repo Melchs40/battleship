@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: "Share Tech Mono", monospace;
+  font-family: 'Share Tech Mono', monospace;
   font-weight: 400;
   font-style: normal;
 }
@@ -39,7 +39,8 @@ body {
   }
 }
 @keyframes blink-caret {
-  from, to {
+  from,
+  to {
     border-color: transparent;
   }
   50% {
@@ -48,12 +49,12 @@ body {
 }
 #input-name {
   -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   color: rgb(1, 16, 4);
   border: none;
   background-color: rgb(17, 102, 17);
-  font-family: "Share Tech Mono", monospace;
+  font-family: 'Share Tech Mono', monospace;
   font-weight: 400;
   font-style: normal;
   font-size: 24px;
@@ -63,13 +64,13 @@ body {
 
 #start {
   -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   border: none;
   color: rgb(17, 102, 17);
   border: 1px solid rgb(17, 102, 17);
   background-color: rgb(1, 16, 4);
-  font-family: "Share Tech Mono", monospace;
+  font-family: 'Share Tech Mono', monospace;
   font-weight: 400;
   font-style: normal;
   font-size: 24px;
@@ -96,15 +97,15 @@ body {
 #player-board {
   display: flex;
   flex-wrap: wrap;
-  height: 400px;
-  width: 400px;
+  height: 320px;
+  width: 320px;
   border: none;
   background-color: rgb(1, 16, 4);
 }
 
 .square {
-  height: 40px;
-  width: 40px;
+  height: 32px;
+  width: 32px;
   border: 1px solid rgb(17, 102, 17);
   background-color: rgb(1, 16, 4);
   color: rgb(17, 102, 17);
@@ -270,4 +271,8 @@ body {
 #hit {
   background-color: rgb(2, 23, 7);
   color: rgb(17, 102, 17);
-}/*# sourceMappingURL=style.css.map */
+  font-family: 'Share Tech Mono', monospace;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 20px;
+} /*# sourceMappingURL=style.css.map */

@@ -5,6 +5,7 @@ import Player from './player';
 
 let content = document.getElementById('content');
 
+let pcTurn = false;
 let user = '';
 let pcUser = '';
 let testLength = 3;
@@ -42,6 +43,7 @@ startButton.addEventListener('click', function () {
   console.log(player.board);
   user = player;
   pcUser = player2;
+  intro.innerHTML = '';
 });
 
 let gameBoards = document.createElement('div');
@@ -69,6 +71,11 @@ function createPlayerBoard() {
   }
 }
 
+if (pcTurn == true) {
+  console.log(user.takeTurn());
+  pcTurn = false;
+}
+
 let computerContainer = document.createElement('div');
 computerContainer.setAttribute('id', 'computer-container');
 computerContainer.classList.add('containers');
@@ -91,11 +98,33 @@ function createComputerBoard() {
           pcUser.game.board[i][1]
         )
       );
+
       square.id = 'hit';
       if (pcUser.game.board[i][2] == 'hit') {
         square.innerHTML = 'X';
       } else square.innerHTML = '-';
+      let activeSquares = document.getElementsByClassName('computer-square');
+      for (let i = 0; i < activeSquares.length; i++) {
+        activeSquares[i].disabled = true;
+      }
+      setTimeout(() => {
+        let [first, second] = user.takeTurn();
+        console.log(first);
+        let playerSquare = document.getElementById('player-board').children;
+        let playerSquareArray = Array.from(playerSquare);
+
+        playerSquareArray[second].id = 'hit';
+        if (first == 'hit') {
+          playerSquareArray[second].innerHTML = 'X';
+        } else playerSquareArray[second].innerHTML = '-';
+
+        let activeSquares = document.getElementsByClassName('computer-square');
+        for (let i = 0; i < activeSquares.length; i++) {
+          activeSquares[i].disabled = false;
+        }
+      }, 3000);
     });
+
     computerBoard.appendChild(square);
   }
 }

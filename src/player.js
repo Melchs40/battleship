@@ -33,9 +33,9 @@ export default class Player {
       }
     }
     let move = Math.floor(Math.random() * legalMoves.length);
-    return this.game.receiveAttack(
-      this.game.board[move][0],
-      this.game.board[move][1]
-    );
+    return [
+      this.game.receiveAttack(legalMoves[move][0], legalMoves[move][1]),
+      legalMoves[move][3],
+    ];
   }
 }
