@@ -85,7 +85,12 @@ export default class Gameboard {
     for (let i = 0; i < board.length; i++) {
       if (x == board[i][0] && y == board[i][1] && board[i][2] == 'empty') {
         board[i][2] = 'miss';
-        return board[i][2];
+        let misses = [];
+        misses.push('I do believe you missed their ships, sir.');
+        misses.push('Miss. We must be getting close to one, captain.');
+        misses.push("Captain, we can't afford to keep missing like this.");
+        misses.push("We've missed. Where must their ships be?");
+        return misses[Math.floor(Math.random() * misses.length)];
       } else if (
         x == board[i][0] &&
         y == board[i][1] &&
@@ -104,36 +109,33 @@ export default class Gameboard {
         if (checkWin.length == 1) {
           board[i][2] = 'hit';
           checkWin = [];
-          return "You've sunk their last ship, captain! The war is over!";
+          let lastSink = [];
+          lastSink.push(
+            "You've sunk their last ship, captain! The war is over!"
+          );
+          lastSink.push("That's their last one, we can finally go home!");
+          lastSink.push("They're waving the white flag, sir. Victory!");
+          lastSink.push("We'll be remembered forever as heroes, Captain!");
+          return lastSink[Math.floor(Math.random() * lastSink.length)];
         } else if (board[i][2].sunk == true) {
           board[i][2] = 'hit';
-          return "You've sunk their battleship!";
+          let sinks = [];
+          sinks.push('More of those and this war will be done in no time!');
+          sinks.push("Captain, you've sunk one of their ships!");
+          sinks.push('Their ship appears to be sunk, sir.');
+          sinks.push('This will turn the tide of battle, lets sink another.');
+          return sinks[Math.floor(Math.random() * sinks.length)];
         } else board[i][2] = 'hit';
-        return board[i][2];
+        let hits = [];
+        hits.push("You've gotten a hit, captain!");
+        hits.push('Brilliant shot!');
+        hits.push("A hit, we've got them on their heels now.");
+        hits.push('Bloody good hit.');
+        return hits[Math.floor(Math.random() * hits.length)];
       }
     }
   }
 }
-
-//I do believe you missed their ships, sir.
-//Miss. We must be getting close to one, captain.
-//Captain, we can't afford to keep missing like this.
-//We've missed. Where must their ships be?
-
-//You gotten a hit, captain!
-//Brilliant shot!
-//A hit, we've got them on their heels now.
-//Bloody good hit.
-
-//More of those and this war will be done in no time!
-//Captain, you've sunk one of their ships!
-//Their ship appears to be sunk, sir.
-//This will turn the tide of battle, lets sink another.
-
-//You've sunk their last ship, captain! The war is over!
-//That's their last one, we can finally go home!
-//They're waving the white flag, sir. Victory!
-//We'll be remembered forever as heroes, Captain!
 
 //Our last ship is sunk. Captain, it's been an honor.
 //Oh no! That was our last ship, captain!
