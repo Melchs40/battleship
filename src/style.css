@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: 'Share Tech Mono', monospace;
+  font-family: "Share Tech Mono", monospace;
   font-weight: 400;
   font-style: normal;
 }
@@ -17,17 +17,36 @@ body {
   color: rgb(17, 102, 17);
 }
 
-#intro {
+.intro-container {
+  display: flex;
+  justify-content: center;
+  width: auto;
+}
+
+.pc-intro {
   text-align: center;
   font-size: 24px;
-  width: 80%;
   color: rgb(17, 102, 17);
   overflow: hidden; /* Ensures the content is not revealed until the animation */
   border-right: 0.15em solid transparent; /* The typwriter cursor */
   white-space: nowrap; /* Keeps the content on a single line */
   margin: 0 auto; /* Gives that scrolling effect as the typing happens */
   letter-spacing: 0.15em; /* Adjust as needed */
-  animation: typing 2s steps(40, end), blink-caret 0.75s step-end 8;
+  animation: blink-caret 0.75s step-end infinite;
+}
+
+.intro {
+  text-align: center;
+  font-size: 24px;
+  color: rgb(17, 102, 17);
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  border-right: 0.15em solid transparent; /* The typwriter cursor */
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  letter-spacing: 0.15em; /* Adjust as needed */
+  animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
 }
 
 @keyframes typing {
@@ -35,12 +54,11 @@ body {
     width: 0;
   }
   to {
-    width: 80%;
+    width: 100%;
   }
 }
 @keyframes blink-caret {
-  from,
-  to {
+  from, to {
     border-color: transparent;
   }
   50% {
@@ -49,12 +67,12 @@ body {
 }
 #input-name {
   -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
+     -moz-appearance: none;
+          appearance: none;
   color: rgb(1, 16, 4);
   border: none;
   background-color: rgb(17, 102, 17);
-  font-family: 'Share Tech Mono', monospace;
+  font-family: "Share Tech Mono", monospace;
   font-weight: 400;
   font-style: normal;
   font-size: 24px;
@@ -64,13 +82,13 @@ body {
 
 #start {
   -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
+     -moz-appearance: none;
+          appearance: none;
   border: none;
   color: rgb(17, 102, 17);
   border: 1px solid rgb(17, 102, 17);
   background-color: rgb(1, 16, 4);
-  font-family: 'Share Tech Mono', monospace;
+  font-family: "Share Tech Mono", monospace;
   font-weight: 400;
   font-style: normal;
   font-size: 24px;
@@ -87,10 +105,17 @@ body {
 
 .containers {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 400px;
+  height: 496px;
   width: 45%;
+}
+
+#computer-name,
+#player-name {
+  color: rgb(17, 102, 17);
+  font-size: 20px;
 }
 
 #computer-board,
@@ -109,6 +134,65 @@ body {
   border: 1px solid rgb(17, 102, 17);
   background-color: rgb(1, 16, 4);
   color: rgb(17, 102, 17);
+}
+
+#player-ships,
+#computer-ships {
+  display: grid;
+  grid-template-columns: repeat(10, 32px);
+  grid-template-rows: 32px 32px;
+  margin-top: 32px;
+  background-color: rgb(1, 16, 4);
+  width: 320px;
+  height: 64px;
+}
+
+.ships {
+  border: 1px solid rgb(1, 16, 4);
+  background-color: rgb(17, 102, 17);
+}
+
+#player-carrier,
+#computer-carrier {
+  display: grid;
+  grid-template-columns: repeat(5, 32px);
+  grid-area: 1/1/2/6;
+}
+
+#player-battleship,
+#computer-battleship {
+  display: grid;
+  grid-template-columns: repeat(4, 32px);
+  grid-area: 1/7/2/11;
+}
+
+#player-cruiser,
+#computer-cruiser {
+  display: grid;
+  grid-template-columns: repeat(3, 32px);
+  grid-area: 2/1/3/4;
+}
+
+#player-submarine,
+#computer-submarine {
+  display: grid;
+  grid-template-columns: repeat(3, 32px);
+  grid-area: 2/5/3/8;
+}
+
+#player-destroyer,
+#computer-destroyer {
+  display: grid;
+  grid-template-columns: repeat(2, 32px);
+  grid-area: 2/9/3/11;
+}
+
+.piece {
+  border: 1px solid rgb(1, 16, 4);
+}
+
+.active {
+  background-color: rgb(25, 150, 25);
 }
 
 .background {
@@ -269,10 +353,10 @@ body {
 }
 
 #hit {
-  background-color: rgb(2, 23, 7);
+  background-color: yellow;
   color: rgb(17, 102, 17);
-  font-family: 'Share Tech Mono', monospace;
+  font-family: "Share Tech Mono", monospace;
   font-weight: 400;
   font-style: normal;
   font-size: 20px;
-} /*# sourceMappingURL=style.css.map */
+}/*# sourceMappingURL=style.css.map */

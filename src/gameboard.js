@@ -87,7 +87,7 @@ export default class Gameboard {
         board[i][2] = 'miss';
         let misses = [];
         misses.push('I do believe you missed their ships, sir.');
-        misses.push('Miss. We must be getting close to one, captain.');
+        misses.push('Miss. We must be getting close to one, Captain.');
         misses.push("Captain, we can't afford to keep missing like this.");
         misses.push("We've missed. Where must their ships be?");
         return misses[Math.floor(Math.random() * misses.length)];
@@ -111,7 +111,7 @@ export default class Gameboard {
           checkWin = [];
           let lastSink = [];
           lastSink.push(
-            "You've sunk their last ship, captain! The war is over!"
+            "You've sunk their last ship, Captain! The war is over!"
           );
           lastSink.push("That's their last one, we can finally go home!");
           lastSink.push("They're waving the white flag, sir. Victory!");
@@ -127,7 +127,7 @@ export default class Gameboard {
           return sinks[Math.floor(Math.random() * sinks.length)];
         } else board[i][2] = 'hit';
         let hits = [];
-        hits.push("You've gotten a hit, captain!");
+        hits.push("You've gotten a hit, Captain!");
         hits.push('Brilliant shot!');
         hits.push("A hit, we've got them on their heels now.");
         hits.push('Bloody good hit.');
