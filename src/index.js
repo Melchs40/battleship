@@ -2,6 +2,7 @@ import './style.css';
 import Gameboard from './gameboard';
 import Ship from './ships';
 import Player from './player';
+import { createPCShips, createPlayerShips } from './ship-ui';
 
 let content = document.getElementById('content');
 
@@ -39,15 +40,11 @@ startButton.addEventListener('click', function () {
   let player = new Player(input.value);
   player.startGame();
   playerName.innerHTML = `Captain ${input.value}`;
-  playerName.style.visibility = 'visible';
-  playerBoard.style.visibility = 'visible';
-  playerShips.style.visibility = 'visible';
+  playerContainer.style.display = 'flex';
   createPlayerBoard();
   let player2 = new Player('Admiral von Eval');
   player2.startGame();
-  computerName.style.visibility = 'visible';
-  computerBoard.style.visibility = 'visible';
-  computerShips.style.visibility = 'visible';
+  computerContainer.style.display = 'flex';
   createComputerBoard();
   console.log(player.board);
   user = player;
@@ -59,81 +56,20 @@ startButton.addEventListener('click', function () {
 let gameBoards = document.createElement('div');
 gameBoards.setAttribute('id', 'game-container');
 
-let playerContainer = document.createElement('div');
+export let playerContainer = document.createElement('div');
 playerContainer.setAttribute('id', 'player-container');
+playerContainer.style.display = 'none';
 playerContainer.classList.add('containers');
 
 let playerName = document.createElement('div');
 playerName.setAttribute('id', 'player-name');
-playerName.style.visibility = 'hidden';
 playerContainer.appendChild(playerName);
 
 let playerBoard = document.createElement('div');
 playerBoard.setAttribute('id', 'player-board');
-playerBoard.style.visibility = 'hidden';
 playerContainer.appendChild(playerBoard);
 
-let playerShips = document.createElement('div');
-playerShips.setAttribute('id', 'player-ships');
-playerShips.style.visibility = 'hidden';
-playerContainer.appendChild(playerShips);
-
-let playerCarrier = document.createElement('div');
-playerCarrier.setAttribute('id', 'player-carrier');
-playerCarrier.classList.add('ships');
-playerShips.appendChild(playerCarrier);
-
-for (let i = 0; i < 5; i++) {
-  let piece = document.createElement('div');
-  piece.classList.add('piece');
-  playerCarrier.appendChild(piece);
-}
-
-let playerBattleship = document.createElement('div');
-playerBattleship.setAttribute('id', 'player-battleship');
-playerBattleship.classList.add('ships');
-playerBattleship.addEventListener('click', () => {
-  playerBattleship.classList.add('active');
-});
-playerShips.appendChild(playerBattleship);
-
-for (let i = 0; i < 4; i++) {
-  let piece = document.createElement('div');
-  piece.classList.add('piece');
-  playerBattleship.appendChild(piece);
-}
-
-let playerCruiser = document.createElement('div');
-playerCruiser.setAttribute('id', 'player-cruiser');
-playerCruiser.classList.add('ships');
-playerShips.appendChild(playerCruiser);
-
-for (let i = 0; i < 3; i++) {
-  let piece = document.createElement('div');
-  piece.classList.add('piece');
-  playerCruiser.appendChild(piece);
-}
-
-let playerSubmarine = document.createElement('div');
-playerSubmarine.setAttribute('id', 'player-submarine');
-playerSubmarine.classList.add('ships');
-playerShips.appendChild(playerSubmarine);
-
-for (let i = 0; i < 3; i++) {
-  let piece = document.createElement('div');
-  piece.classList.add('piece');
-  playerSubmarine.appendChild(piece);
-}
-
-let playerDestroyer = document.createElement('div');
-playerDestroyer.setAttribute('id', 'player-destroyer');
-playerDestroyer.classList.add('ships');
-playerShips.appendChild(playerDestroyer);
-for (let i = 0; i < 2; i++) {
-  let piece = document.createElement('div');
-  piece.classList.add('piece');
-  playerDestroyer.appendChild(piece);
-}
+createPlayerShips();
 
 function createPlayerBoard() {
   for (let i = 0; i < 100; i++) {
@@ -153,79 +89,21 @@ if (pcTurn == true) {
   pcTurn = false;
 }
 
-let computerContainer = document.createElement('div');
+export let computerContainer = document.createElement('div');
 computerContainer.setAttribute('id', 'computer-container');
+computerContainer.style.display = 'none';
 computerContainer.classList.add('containers');
 
 let computerName = document.createElement('div');
 computerName.setAttribute('id', 'computer-name');
 computerName.innerHTML = 'Admiral Wicked von Eval';
-computerName.style.visibility = 'hidden';
 computerContainer.appendChild(computerName);
 
 let computerBoard = document.createElement('div');
 computerBoard.setAttribute('id', 'computer-board');
-computerBoard.style.visibility = 'hidden';
 computerContainer.appendChild(computerBoard);
 
-let computerShips = document.createElement('div');
-computerShips.setAttribute('id', 'computer-ships');
-computerShips.style.visibility = 'hidden';
-computerContainer.appendChild(computerShips);
-
-let computerCarrier = document.createElement('div');
-computerCarrier.setAttribute('id', 'computer-carrier');
-computerCarrier.classList.add('ships');
-computerShips.appendChild(computerCarrier);
-
-for (let i = 0; i < 5; i++) {
-  let piece = document.createElement('div');
-  piece.classList.add('piece');
-  computerCarrier.appendChild(piece);
-}
-
-let computerBattleship = document.createElement('div');
-computerBattleship.setAttribute('id', 'computer-battleship');
-computerBattleship.classList.add('ships');
-computerShips.appendChild(computerBattleship);
-
-for (let i = 0; i < 4; i++) {
-  let piece = document.createElement('div');
-  piece.classList.add('piece');
-  computerBattleship.appendChild(piece);
-}
-
-let computerCruiser = document.createElement('div');
-computerCruiser.setAttribute('id', 'computer-cruiser');
-computerCruiser.classList.add('ships');
-computerShips.appendChild(computerCruiser);
-
-for (let i = 0; i < 3; i++) {
-  let piece = document.createElement('div');
-  piece.classList.add('piece');
-  computerCruiser.appendChild(piece);
-}
-
-let computerSubmarine = document.createElement('div');
-computerSubmarine.setAttribute('id', 'computer-submarine');
-computerSubmarine.classList.add('ships');
-computerShips.appendChild(computerSubmarine);
-
-for (let i = 0; i < 3; i++) {
-  let piece = document.createElement('div');
-  piece.classList.add('piece');
-  computerSubmarine.appendChild(piece);
-}
-
-let computerDestroyer = document.createElement('div');
-computerDestroyer.setAttribute('id', 'computer-destroyer');
-computerDestroyer.classList.add('ships');
-computerShips.appendChild(computerDestroyer);
-for (let i = 0; i < 2; i++) {
-  let piece = document.createElement('div');
-  piece.classList.add('piece');
-  computerDestroyer.appendChild(piece);
-}
+createPCShips();
 
 function createComputerBoard() {
   for (let i = 0; i < 100; i++) {
