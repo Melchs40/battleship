@@ -191,6 +191,10 @@ body {
   border: 1px solid rgb(1, 16, 4);
 }
 
+.used {
+  background-color: rgb(2, 23, 7);
+}
+
 .active {
   background-color: rgb(25, 150, 25);
 }

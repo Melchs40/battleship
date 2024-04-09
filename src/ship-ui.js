@@ -1,4 +1,4 @@
-import { computerContainer, playerContainer } from '.';
+import { computerContainer, pieceLength, playerContainer, setPiece } from '.';
 
 export function createPlayerShips() {
   let playerShips = document.createElement('div');
@@ -8,6 +8,19 @@ export function createPlayerShips() {
   let playerCarrier = document.createElement('div');
   playerCarrier.setAttribute('id', 'player-carrier');
   playerCarrier.classList.add('ships');
+  playerCarrier.addEventListener('click', () => {
+    if (playerCarrier.classList.contains('active')) {
+      playerCarrier.classList.remove('active');
+      playerCarrier.classList.remove('used');
+      setPiece = false;
+      pieceLength = null;
+    } else {
+      playerCarrier.classList.add('active');
+      playerCarrier.classList.add('used');
+      setPiece = true;
+      pieceLength = 5;
+    }
+  });
   playerShips.appendChild(playerCarrier);
 
   for (let i = 0; i < 5; i++) {
@@ -20,7 +33,17 @@ export function createPlayerShips() {
   playerBattleship.setAttribute('id', 'player-battleship');
   playerBattleship.classList.add('ships');
   playerBattleship.addEventListener('click', () => {
-    playerBattleship.classList.add('active');
+    if (playerBattleship.classList.contains('active')) {
+      playerBattleship.classList.remove('active');
+      playerBattleship.classList.remove('used');
+      setPiece = false;
+      pieceLength = null;
+    } else {
+      playerBattleship.classList.add('active');
+      playerBattleship.classList.add('used');
+      setPiece = true;
+      pieceLength = 4;
+    }
   });
   playerShips.appendChild(playerBattleship);
 
@@ -33,6 +56,19 @@ export function createPlayerShips() {
   let playerCruiser = document.createElement('div');
   playerCruiser.setAttribute('id', 'player-cruiser');
   playerCruiser.classList.add('ships');
+  playerCruiser.addEventListener('click', () => {
+    if (playerCruiser.classList.contains('active')) {
+      playerCruiser.classList.remove('active');
+      playerCruiser.classList.remove('used');
+      setPiece = false;
+      pieceLength = null;
+    } else {
+      playerCruiser.classList.add('active');
+      playerCruiser.classList.add('used');
+      setPiece = true;
+      pieceLength = 3;
+    }
+  });
   playerShips.appendChild(playerCruiser);
 
   for (let i = 0; i < 3; i++) {
@@ -44,6 +80,19 @@ export function createPlayerShips() {
   let playerSubmarine = document.createElement('div');
   playerSubmarine.setAttribute('id', 'player-submarine');
   playerSubmarine.classList.add('ships');
+  playerSubmarine.addEventListener('click', () => {
+    if (playerSubmarine.classList.contains('active')) {
+      playerSubmarine.classList.remove('active');
+      playerSubmarine.classList.remove('used');
+      setPiece = false;
+      pieceLength = null;
+    } else {
+      playerSubmarine.classList.add('active');
+      playerSubmarine.classList.add('used');
+      setPiece = true;
+      pieceLength = 3;
+    }
+  });
   playerShips.appendChild(playerSubmarine);
 
   for (let i = 0; i < 3; i++) {
@@ -55,7 +104,21 @@ export function createPlayerShips() {
   let playerDestroyer = document.createElement('div');
   playerDestroyer.setAttribute('id', 'player-destroyer');
   playerDestroyer.classList.add('ships');
+  playerDestroyer.addEventListener('click', () => {
+    if (playerDestroyer.classList.contains('active')) {
+      playerDestroyer.classList.remove('active');
+      playerDestroyer.classList.remove('used');
+      setPiece = false;
+      pieceLength = null;
+    } else {
+      playerDestroyer.classList.add('active');
+      playerDestroyer.classList.add('used');
+      setPiece = true;
+      pieceLength = 2;
+    }
+  });
   playerShips.appendChild(playerDestroyer);
+
   for (let i = 0; i < 2; i++) {
     let piece = document.createElement('div');
     piece.classList.add('piece');

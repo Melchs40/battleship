@@ -9,7 +9,9 @@ let content = document.getElementById('content');
 let pcTurn = false;
 let user = '';
 let pcUser = '';
-let testLength = 3;
+export let pieceLength = null;
+export let setPiece = false;
+let horizontal = true;
 
 //create the user interface
 let ui = document.createElement('div');
@@ -76,9 +78,31 @@ function createPlayerBoard() {
     let square = document.createElement('button');
     square.classList.add('square');
     square.classList.add('player-square');
-    square.setAttribute('id', 'player-' + i);
+    square.setAttribute('id', i);
     square.addEventListener('click', function () {
       console.log(square.id);
+      //   console.log(user.game.board);
+
+      if (setPiece == true && square.id == user.game.board[square.id][3]) {
+        intro.innerHTML = user.game.placeShip(
+          user.game.board[square.id][0],
+          user.game.board[square.id][1],
+          pieceLength,
+          horizontal
+        );
+        if (
+          intro.innerHTML.indexOf('whole') !== -1 ||
+          intro.innerHTML.indexOf('placed') !== -1
+        ) {
+          console.log('these words exist');
+        } else {
+          let activeClass = document.getElementsByClassName('active');
+          while (activeClass.length > 0) {
+            activeClass[0].classList.remove('active');
+          }
+        }
+        console.log(user.game.board);
+      }
     });
     playerBoard.appendChild(square);
   }

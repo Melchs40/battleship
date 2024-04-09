@@ -59,7 +59,7 @@ export default class Gameboard {
             board[j][2] !== 'empty'
           ) {
             shipCoords = [];
-            return 'A ship has already been placed here, captain!';
+            return 'A ship has already been placed here, Captain!';
           }
         }
       }
@@ -74,7 +74,7 @@ export default class Gameboard {
           }
         }
       }
-    } else return 'position not valid';
+    } else return 'The whole ship must be on the board, Captain!';
   }
 
   receiveAttack(x, y) {
