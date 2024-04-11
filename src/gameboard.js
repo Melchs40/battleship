@@ -128,9 +128,9 @@ export default class Gameboard {
         } else board[i][2] = 'hit';
         let hits = [];
         hits.push("You've gotten a hit, Captain!");
-        hits.push('Brilliant shot!');
+        hits.push("Brilliant shot! Let's hit them again!");
         hits.push("A hit, we've got them on their heels now.");
-        hits.push('Bloody good hit.');
+        hits.push('Bloody good hit. They must be reeling.');
         return ['hit', hits[Math.floor(Math.random() * hits.length)]];
       }
     }
