@@ -22,7 +22,7 @@ export default class Gameboard {
     let ship = new Ship(size);
     let board = this.board;
     let shipCoords = [];
-    if (direction == true && y >= 1 && y <= 7) {
+    if (direction == true && y + size >= 1 && y + size <= 11) {
       for (let i = y; i < y + ship.length; i++) {
         for (let j = 0; j < board.length; j++) {
           if (x == board[j][0] && i == board[j][1] && board[j][2] == 'empty') {
@@ -48,7 +48,7 @@ export default class Gameboard {
           }
         }
       }
-    } else if (direction == false && x >= 1 && x <= 7) {
+    } else if (direction == false && x + size >= 1 && x + size <= 11) {
       for (let i = x; i < x + ship.length; i++) {
         for (let j = 0; j < board.length; j++) {
           if (i == board[j][0] && y == board[j][1] && board[j][2] == 'empty') {

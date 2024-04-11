@@ -9,7 +9,7 @@ let content = document.getElementById('content');
 let pcTurn = false;
 let user = '';
 let pcUser = '';
-export let pieceLength = null;
+export let pieceLength = 0;
 export let setPiece = false;
 let horizontal = true;
 
@@ -80,9 +80,11 @@ function createPlayerBoard() {
     square.classList.add('player-square');
     square.setAttribute('id', i);
     square.addEventListener('click', function () {
+      intro.classList.remove('intro');
+      intro.offsetWidth;
+      intro.classList.add('intro');
       console.log(square.id);
       //   console.log(user.game.board);
-
       if (setPiece == true && square.id == user.game.board[square.id][3]) {
         intro.innerHTML = user.game.placeShip(
           user.game.board[square.id][0],
@@ -95,11 +97,15 @@ function createPlayerBoard() {
           intro.innerHTML.indexOf('placed') !== -1
         ) {
           console.log('these words exist');
+          console.log(`X = ${user.game.board[square.id][0]}`);
+          console.log(`X = ${user.game.board[square.id][1]}`);
+          console.log(pieceLength);
         } else {
           let activeClass = document.getElementsByClassName('active');
           while (activeClass.length > 0) {
             activeClass[0].classList.remove('active');
           }
+          intro.innerHTML = 'Place your ships on the grid to the left';
         }
         console.log(user.game.board);
       }
