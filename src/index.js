@@ -146,13 +146,14 @@ function createComputerBoard() {
         pcUser.game.board[i][0],
         pcUser.game.board[i][1]
       );
-      intro.innerHTML = response;
+      intro.innerHTML = response[1];
       intro.classList.remove('pc-intro');
       intro.classList.add('intro');
 
-      square.id = 'hit';
+      square.id = 'miss';
       if (pcUser.game.board[i][2] == 'hit') {
         square.innerHTML = 'X';
+        square.id = 'hit';
       } else square.innerHTML = '-';
       let activeSquares = document.getElementsByClassName('computer-square');
       for (let i = 0; i < activeSquares.length; i++) {
@@ -160,13 +161,15 @@ function createComputerBoard() {
       }
       setTimeout(() => {
         let [first, second] = user.takeTurn();
-        console.log(first);
+        console.log(`first- ${first}`);
+        console.log(`second- ${second}`);
         let playerSquare = document.getElementById('player-board').children;
         let playerSquareArray = Array.from(playerSquare);
 
-        playerSquareArray[second].id = 'hit';
-        if (first == 'hit') {
+        playerSquareArray[second].id = 'miss';
+        if (first[0] == 'hit') {
           playerSquareArray[second].innerHTML = 'X';
+          playerSquareArray[second].id = 'hit';
         } else playerSquareArray[second].innerHTML = '-';
 
         let activeSquares = document.getElementsByClassName('computer-square');

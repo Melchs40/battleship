@@ -353,11 +353,15 @@ body {
   }
 }
 #miss {
-  background-color: red;
+  color: rgb(17, 102, 17);
+  font-family: "Share Tech Mono", monospace;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 20px;
 }
 
 #hit {
-  background-color: yellow;
+  background-color: rgb(2, 23, 7);
   color: rgb(17, 102, 17);
   font-family: "Share Tech Mono", monospace;
   font-weight: 400;

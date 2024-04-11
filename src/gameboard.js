@@ -90,7 +90,7 @@ export default class Gameboard {
         misses.push('Miss. We must be getting close to one, Captain.');
         misses.push("Captain, we can't afford to keep missing like this.");
         misses.push("We've missed. Where must their ships be?");
-        return misses[Math.floor(Math.random() * misses.length)];
+        return ['miss', misses[Math.floor(Math.random() * misses.length)]];
       } else if (
         x == board[i][0] &&
         y == board[i][1] &&
@@ -116,7 +116,7 @@ export default class Gameboard {
           lastSink.push("That's their last one, we can finally go home!");
           lastSink.push("They're waving the white flag, sir. Victory!");
           lastSink.push("We'll be remembered forever as heroes, Captain!");
-          return lastSink[Math.floor(Math.random() * lastSink.length)];
+          return ['hit', lastSink[Math.floor(Math.random() * lastSink.length)]];
         } else if (board[i][2].sunk == true) {
           board[i][2] = 'hit';
           let sinks = [];
@@ -124,14 +124,14 @@ export default class Gameboard {
           sinks.push("Captain, you've sunk one of their ships!");
           sinks.push('Their ship appears to be sunk, sir.');
           sinks.push('This will turn the tide of battle, lets sink another.');
-          return sinks[Math.floor(Math.random() * sinks.length)];
+          return ['hit', sinks[Math.floor(Math.random() * sinks.length)]];
         } else board[i][2] = 'hit';
         let hits = [];
         hits.push("You've gotten a hit, Captain!");
         hits.push('Brilliant shot!');
         hits.push("A hit, we've got them on their heels now.");
         hits.push('Bloody good hit.');
-        return hits[Math.floor(Math.random() * hits.length)];
+        return ['hit', hits[Math.floor(Math.random() * hits.length)]];
       }
     }
   }
