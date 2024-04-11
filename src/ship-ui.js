@@ -15,8 +15,12 @@ export function createPlayerShips() {
       setPiece = false;
       pieceLength = null;
     } else {
+      let activeClass = document.getElementsByClassName('active');
+      while (activeClass.length > 0) {
+        activeClass[0].classList.remove('active');
+      }
       playerCarrier.classList.add('active');
-      playerCarrier.classList.add('used');
+      //   playerCarrier.classList.add('used');
       setPiece = true;
       pieceLength = 5;
     }
@@ -39,8 +43,12 @@ export function createPlayerShips() {
       setPiece = false;
       pieceLength = null;
     } else {
+      let activeClass = document.getElementsByClassName('active');
+      while (activeClass.length > 0) {
+        activeClass[0].classList.remove('active');
+      }
       playerBattleship.classList.add('active');
-      playerBattleship.classList.add('used');
+      //   playerBattleship.classList.add('used');
       setPiece = true;
       pieceLength = 4;
     }
@@ -63,8 +71,12 @@ export function createPlayerShips() {
       setPiece = false;
       pieceLength = null;
     } else {
+      let activeClass = document.getElementsByClassName('active');
+      while (activeClass.length > 0) {
+        activeClass[0].classList.remove('active');
+      }
       playerCruiser.classList.add('active');
-      playerCruiser.classList.add('used');
+      //   playerCruiser.classList.add('used');
       setPiece = true;
       pieceLength = 3;
     }
@@ -87,8 +99,12 @@ export function createPlayerShips() {
       setPiece = false;
       pieceLength = null;
     } else {
+      let activeClass = document.getElementsByClassName('active');
+      while (activeClass.length > 0) {
+        activeClass[0].classList.remove('active');
+      }
       playerSubmarine.classList.add('active');
-      playerSubmarine.classList.add('used');
+      //   playerSubmarine.classList.add('used');
       setPiece = true;
       pieceLength = 3;
     }
@@ -111,8 +127,12 @@ export function createPlayerShips() {
       setPiece = false;
       pieceLength = null;
     } else {
+      let activeClass = document.getElementsByClassName('active');
+      while (activeClass.length > 0) {
+        activeClass[0].classList.remove('active');
+      }
       playerDestroyer.classList.add('active');
-      playerDestroyer.classList.add('used');
+      //   playerDestroyer.classList.add('used');
       setPiece = true;
       pieceLength = 2;
     }

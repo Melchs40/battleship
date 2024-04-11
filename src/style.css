@@ -5,6 +5,17 @@ body {
   font-style: normal;
 }
 
+.interface {
+  position: absolute;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+
 .ui {
   position: relative;
   z-index: 1;
@@ -46,7 +57,7 @@ body {
   white-space: nowrap; /* Keeps the content on a single line */
   margin: 0 auto; /* Gives that scrolling effect as the typing happens */
   letter-spacing: 0.15em; /* Adjust as needed */
-  animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+  animation: typing 2s steps(40, end), blink-caret 0.75s step-end infinite;
 }
 
 @keyframes typing {
@@ -110,6 +121,30 @@ body {
   align-items: center;
   height: 496px;
   width: 45%;
+}
+
+#game-button-box {
+  display: flex;
+  width: 150px;
+  position: relative;
+  justify-content: center;
+  align-self: end;
+  margin-bottom: 64px;
+}
+
+#game-button {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border: none;
+  color: rgb(17, 102, 17);
+  border: 1px solid rgb(17, 102, 17);
+  background-color: rgb(1, 16, 4);
+  font-family: "Share Tech Mono", monospace;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 24px;
+  height: 32px;
 }
 
 #computer-name,

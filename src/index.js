@@ -46,6 +46,7 @@ startButton.addEventListener('click', function () {
   createPlayerBoard();
   let player2 = new Player('Admiral von Eval');
   player2.startGame();
+  newBtn.style.display = 'flex';
   computerContainer.style.display = 'flex';
   createComputerBoard();
   console.log(player.board);
@@ -74,6 +75,7 @@ playerContainer.appendChild(playerBoard);
 createPlayerShips();
 
 function createPlayerBoard() {
+  let startGame = 0;
   for (let i = 0; i < 100; i++) {
     let square = document.createElement('button');
     square.classList.add('square');
@@ -103,9 +105,18 @@ function createPlayerBoard() {
         } else {
           let activeClass = document.getElementsByClassName('active');
           while (activeClass.length > 0) {
+            let newActive = activeClass[0].cloneNode(true);
+            activeClass[0].parentNode.replaceChild(newActive, activeClass[0]);
+            newActive.classList.add('used');
             activeClass[0].classList.remove('active');
+            startGame++;
           }
-          intro.innerHTML = 'Place your ships on the grid to the left';
+          if (startGame < 5) {
+            intro.innerHTML = 'Place your ships on the grid to the left';
+          } else {
+            newBtn.innerHTML = 'Begin';
+            intro.innerHTML = 'Press the button to begin your offensive';
+          }
         }
         console.log(user.game.board);
       }
@@ -118,6 +129,23 @@ if (pcTurn == true) {
   console.log(user.takeTurn());
   pcTurn = false;
 }
+
+let newBtnBox = document.createElement('div');
+newBtnBox.setAttribute('id', 'game-button-box');
+
+let newBtn = document.createElement('button');
+newBtn.innerHTML = 'Horizontal';
+newBtn.addEventListener('click', () => {
+  if (newBtn.innerHTML == 'Horizontal') {
+    newBtn.innerHTML = 'Vertical';
+    horizontal = false;
+  } else {
+    newBtn.innerHTML = 'Horizontal';
+    horizontal = true;
+  }
+});
+newBtn.setAttribute('id', 'game-button');
+newBtn.style.display = 'none';
 
 export let computerContainer = document.createElement('div');
 computerContainer.setAttribute('id', 'computer-container');
@@ -147,6 +175,8 @@ function createComputerBoard() {
         pcUser.game.board[i][1]
       );
       intro.innerHTML = response[1];
+      intro.classList.remove('intro');
+      intro.offsetWidth;
       intro.classList.remove('pc-intro');
       intro.classList.add('intro');
 
@@ -191,7 +221,9 @@ ui.appendChild(introContainer);
 introContainer.appendChild(intro);
 ui.appendChild(gameBoards);
 gameBoards.appendChild(playerContainer);
+gameBoards.appendChild(newBtnBox);
 gameBoards.appendChild(computerContainer);
+newBtnBox.appendChild(newBtn);
 
 //creates background image
 let background = document.createElement('div');
