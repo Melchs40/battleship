@@ -114,8 +114,23 @@ function createPlayerBoard() {
           if (startGame < 5) {
             intro.innerHTML = 'Place your ships on the grid to the left';
           } else {
-            newBtn.innerHTML = 'Begin';
-            intro.innerHTML = 'Press the button to begin your offensive';
+            let beginButton = newBtn.cloneNode(true);
+            newBtn.parentNode.replaceChild(beginButton, newBtn);
+            beginButton.innerHTML = 'Begin';
+            beginButton.setAttribute('id', 'game-button');
+            intro.innerHTML = 'Press the button to begin your offensive.';
+            beginButton.addEventListener('click', () => {
+              intro.classList.remove('intro');
+              intro.offsetWidth;
+              intro.innerHTML = 'I wish you good luck, sir. Fire away!';
+              beginButton.style.display = 'none';
+              intro.classList.add('intro');
+              let activeSquares =
+                document.getElementsByClassName('computer-square');
+              for (let i = 0; i < activeSquares.length; i++) {
+                activeSquares[i].disabled = false;
+              }
+            });
           }
         }
         console.log(user.game.board);
@@ -169,6 +184,7 @@ function createComputerBoard() {
     square.classList.add('square');
     square.classList.add('computer-square');
     square.setAttribute('id', 'computer-' + i);
+    square.disabled = true;
     square.addEventListener('click', function () {
       let response = pcUser.game.receiveAttack(
         pcUser.game.board[i][0],
