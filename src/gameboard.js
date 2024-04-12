@@ -3,6 +3,7 @@ import Ship from './ships';
 export default class Gameboard {
   constructor() {
     this.board = null;
+    this.lastMove = null;
   }
 
   createBoard() {
@@ -33,7 +34,7 @@ export default class Gameboard {
             board[j][2] !== 'empty'
           ) {
             shipCoords = [];
-            return 'A ship has already been placed here, captain!';
+            return 'A ship has already been placed here, Captain!';
           }
         }
       }
@@ -74,7 +75,10 @@ export default class Gameboard {
           }
         }
       }
-    } else return 'The whole ship must be on the board, Captain!';
+    } else {
+      return 'The whole ship must be on the board, Captain!';
+    }
+    this.lastMove = [x, y, size, direction];
   }
 
   receiveAttack(x, y) {
@@ -127,7 +131,7 @@ export default class Gameboard {
           return ['hit', sinks[Math.floor(Math.random() * sinks.length)]];
         } else board[i][2] = 'hit';
         let hits = [];
-        hits.push("You've gotten a hit, Captain!");
+        hits.push("I say you've gotten a hit, Captain!");
         hits.push("Brilliant shot! Let's hit them again!");
         hits.push("A hit, we've got them on their heels now.");
         hits.push('Bloody good hit. They must be reeling.');

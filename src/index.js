@@ -85,7 +85,7 @@ function createPlayerBoard() {
       intro.classList.remove('intro');
       intro.offsetWidth;
       intro.classList.add('intro');
-      console.log(square.id);
+      //   console.log(square.id);
       //   console.log(user.game.board);
       if (setPiece == true && square.id == user.game.board[square.id][3]) {
         intro.innerHTML = user.game.placeShip(
@@ -98,11 +98,37 @@ function createPlayerBoard() {
           intro.innerHTML.indexOf('whole') !== -1 ||
           intro.innerHTML.indexOf('placed') !== -1
         ) {
-          console.log('these words exist');
-          console.log(`X = ${user.game.board[square.id][0]}`);
-          console.log(`X = ${user.game.board[square.id][1]}`);
-          console.log(pieceLength);
         } else {
+          function pcMove() {
+            let pcPosition = Math.floor(Math.random() * 2);
+            if (pcPosition == 0) {
+              let move = pcUser.game.placeShip(
+                Math.floor(Math.random() * 10) + 1,
+                Math.floor(Math.random() * (11 - pieceLength)) + 1,
+                pieceLength,
+                true
+              );
+              console.log(pcUser.game.lastMove);
+              if (move == 'A ship has already been placed here, Captain!') {
+                console.log('repeat');
+                return pcMove();
+              }
+            } else {
+              let move = pcUser.game.placeShip(
+                Math.floor(Math.random() * (11 - pieceLength)) + 1,
+                Math.floor(Math.random() * 10) + 1,
+                pieceLength,
+                false
+              );
+              console.log(pcUser.game.lastMove);
+              if (move == 'A ship has already been placed here, Captain!') {
+                console.log('repeat');
+                return pcMove();
+              }
+            }
+          }
+          pcMove();
+          console.log(pcUser.game.board);
           let activeClass = document.getElementsByClassName('active');
           while (activeClass.length > 0) {
             let newActive = activeClass[0].cloneNode(true);
@@ -133,7 +159,7 @@ function createPlayerBoard() {
             });
           }
         }
-        console.log(user.game.board);
+        // console.log(user.game.board);
       }
     });
     playerBoard.appendChild(square);
@@ -224,7 +250,7 @@ function createComputerBoard() {
         }
         intro.classList.add('pc-intro');
         intro.classList.remove('intro');
-      }, 3000);
+      }, 2000);
     });
 
     computerBoard.appendChild(square);

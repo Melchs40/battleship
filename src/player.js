@@ -16,9 +16,6 @@ export default class Player {
   startGame() {
     this.game = new Gameboard();
     this.game.createBoard();
-    this.game.placeShip(1, 1, 3, true);
-    this.game.placeShip(3, 1, 3, true);
-    this.game.placeShip(7, 1, 3, true);
     this.board = this.game.board;
   }
 
