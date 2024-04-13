@@ -120,7 +120,19 @@ export default class Gameboard {
           lastSink.push("That's their last one, we can finally go home!");
           lastSink.push("They're waving the white flag, sir. Victory!");
           lastSink.push("We'll be remembered forever as heroes, Captain!");
-          return ['hit', lastSink[Math.floor(Math.random() * lastSink.length)]];
+          let lastPCSink = [];
+          lastPCSink.push(
+            "Our last ship is sunk. Captain, it's been an honor."
+          );
+          lastPCSink.push('Oh no! That was our last ship, captain!');
+          lastPCSink.push('We fought to the bitter end.');
+          lastPCSink.push("We must abandon ship, we've lost the battle.");
+          return [
+            'hit',
+            lastSink[Math.floor(Math.random() * lastSink.length)],
+            lastPCSink[Math.floor(Math.random() * lastPCSink.length)],
+            lastSink[Math.floor(Math.random() * lastSink.length)],
+          ];
         } else if (board[i][2].sunk == true) {
           board[i][2] = 'hit';
           let sinks = [];
@@ -140,8 +152,3 @@ export default class Gameboard {
     }
   }
 }
-
-//Our last ship is sunk. Captain, it's been an honor.
-//Oh no! That was our last ship, captain!
-//We fought to the bitter end.
-//We must abandon ship, we've lost the battle.

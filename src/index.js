@@ -12,6 +12,7 @@ let pcUser = '';
 export let pieceLength = 0;
 export let setPiece = false;
 let horizontal = true;
+let beginButton2 = '';
 
 //create the user interface
 let ui = document.createElement('div');
@@ -37,7 +38,7 @@ let startButton = document.createElement('button');
 startButton.setAttribute('id', 'start');
 startButton.innerHTML = 'START';
 intro.appendChild(startButton);
-startButton.addEventListener('click', function () {
+startButton.addEventListener('click', function beginGame() {
   intro.classList.remove('intro');
   let player = new Player(input.value);
   player.startGame();
@@ -145,6 +146,7 @@ function createPlayerBoard() {
             beginButton.innerHTML = 'Begin';
             beginButton.setAttribute('id', 'game-button');
             intro.innerHTML = 'Press the button to begin your offensive.';
+            beginButton2 = beginButton;
             beginButton.addEventListener('click', () => {
               intro.classList.remove('intro');
               intro.offsetWidth;
@@ -153,8 +155,11 @@ function createPlayerBoard() {
               intro.classList.add('intro');
               let activeSquares =
                 document.getElementsByClassName('computer-square');
+              let activePlayerSquares =
+                document.getElementsByClassName('player-square');
               for (let i = 0; i < activeSquares.length; i++) {
                 activeSquares[i].disabled = false;
+                activePlayerSquares[i].disabled = true;
               }
             });
           }
@@ -211,47 +216,132 @@ function createComputerBoard() {
     square.classList.add('computer-square');
     square.setAttribute('id', 'computer-' + i);
     square.disabled = true;
-    square.addEventListener('click', function () {
-      let response = pcUser.game.receiveAttack(
-        pcUser.game.board[i][0],
-        pcUser.game.board[i][1]
-      );
-      intro.innerHTML = response[1];
-      intro.classList.remove('intro');
-      intro.offsetWidth;
-      intro.classList.remove('pc-intro');
-      intro.classList.add('intro');
+    square.addEventListener(
+      'click',
+      function () {
+        let response = pcUser.game.receiveAttack(
+          pcUser.game.board[i][0],
+          pcUser.game.board[i][1]
+        );
+        if (response.length == 3) {
+          let win = document.createElement('div');
+          win.setAttribute('id', 'win');
+          win.style.display = 'flex';
+          let winText = document.createElement('div');
+          winText.setAttribute('id', 'win-text');
+          winText.innerHTML = response[1];
+          let winButton = document.createElement('div');
+          winButton.setAttribute('id', 'win-button');
+          winButton.innerHTML = 'Try Again?';
+          winButton.addEventListener('click', function beginGame() {
+            let playerStuff = document.getElementById('player-board');
+            let pcStuff = document.getElementById('computer-board');
+            let shipStuff = document.getElementById('player-ships');
+            let gameButtonBox = document.getElementById('game-button-box');
+            while (playerStuff.children.length > 0) {
+              playerStuff.removeChild(playerStuff.firstChild);
+              pcStuff.removeChild(pcStuff.firstChild);
+            }
+            while (shipStuff.children.length > 0) {
+              shipStuff.removeChild(shipStuff.firstChild);
+            }
+            while (gameButtonBox.children.length > 0) {
+              gameButtonBox.removeChild(gameButtonBox.firstChild);
+            }
+            playerContainer.removeChild(shipStuff);
+            user.startGame();
+            createPlayerBoard();
+            pcUser.startGame();
+            createComputerBoard();
+            createPlayerShips();
+            gameButtonBox.appendChild(newBtn);
+            intro.innerHTML = 'Place your ships on the grid to the left';
+            intro.classList.add('intro');
+            win.style.display = 'none';
+          });
+          ui.appendChild(win);
+          win.appendChild(winText);
+          win.appendChild(winButton);
+        }
+        intro.innerHTML = response[1];
+        intro.classList.remove('intro');
+        intro.offsetWidth;
+        intro.classList.remove('pc-intro');
+        intro.classList.add('intro');
 
-      square.id = 'miss';
-      if (pcUser.game.board[i][2] == 'hit') {
-        square.innerHTML = 'X';
-        square.id = 'hit';
-      } else square.innerHTML = '-';
-      let activeSquares = document.getElementsByClassName('computer-square');
-      for (let i = 0; i < activeSquares.length; i++) {
-        activeSquares[i].disabled = true;
-      }
-      setTimeout(() => {
-        let [first, second] = user.takeTurn();
-        console.log(`first- ${first}`);
-        console.log(`second- ${second}`);
-        let playerSquare = document.getElementById('player-board').children;
-        let playerSquareArray = Array.from(playerSquare);
-
-        playerSquareArray[second].id = 'miss';
-        if (first[0] == 'hit') {
-          playerSquareArray[second].innerHTML = 'X';
-          playerSquareArray[second].id = 'hit';
-        } else playerSquareArray[second].innerHTML = '-';
-
+        square.id = 'miss';
+        if (pcUser.game.board[i][2] == 'hit') {
+          square.innerHTML = 'X';
+          square.id = 'hit';
+        } else square.innerHTML = '-';
         let activeSquares = document.getElementsByClassName('computer-square');
         for (let i = 0; i < activeSquares.length; i++) {
-          activeSquares[i].disabled = false;
+          activeSquares[i].disabled = true;
         }
-        intro.classList.add('pc-intro');
-        intro.classList.remove('intro');
-      }, 2000);
-    });
+        setTimeout(() => {
+          let [first, second] = user.takeTurn();
+          console.log(`first- ${first}`);
+          console.log(`second- ${second}`);
+          let playerSquare = document.getElementById('player-board').children;
+          let playerSquareArray = Array.from(playerSquare);
+
+          playerSquareArray[second].id = 'miss';
+          if (first[0] == 'hit') {
+            playerSquareArray[second].innerHTML = 'X';
+            playerSquareArray[second].id = 'hit';
+            if (first.length == 3) {
+              let win = document.createElement('div');
+              win.setAttribute('id', 'win');
+              win.style.display = 'flex';
+              let winText = document.createElement('div');
+              winText.setAttribute('id', 'win-text');
+              winText.innerHTML = first[2];
+              let winButton = document.createElement('div');
+              winButton.setAttribute('id', 'win-button');
+              winButton.innerHTML = 'Try Again?';
+              winButton.addEventListener('click', function beginGame() {
+                let playerStuff = document.getElementById('player-board');
+                let pcStuff = document.getElementById('computer-board');
+                let shipStuff = document.getElementById('player-ships');
+                let gameButtonBox = document.getElementById('game-button-box');
+                while (playerStuff.children.length > 0) {
+                  playerStuff.removeChild(playerStuff.firstChild);
+                  pcStuff.removeChild(pcStuff.firstChild);
+                }
+                while (shipStuff.children.length > 0) {
+                  shipStuff.removeChild(shipStuff.firstChild);
+                }
+                while (gameButtonBox.children.length > 0) {
+                  gameButtonBox.removeChild(gameButtonBox.firstChild);
+                }
+                playerContainer.removeChild(shipStuff);
+                user.startGame();
+                createPlayerBoard();
+                pcUser.startGame();
+                createComputerBoard();
+                createPlayerShips();
+                gameButtonBox.appendChild(newBtn);
+                intro.innerHTML = 'Place your ships on the grid to the left';
+                intro.classList.add('intro');
+                win.style.display = 'none';
+              });
+              ui.appendChild(win);
+              win.appendChild(winText);
+              win.appendChild(winButton);
+            }
+          } else playerSquareArray[second].innerHTML = '-';
+
+          let activeSquares =
+            document.getElementsByClassName('computer-square');
+          for (let i = 0; i < activeSquares.length; i++) {
+            activeSquares[i].disabled = false;
+          }
+          intro.classList.add('pc-intro');
+          intro.classList.remove('intro');
+        }, 2000);
+      },
+      { once: true }
+    );
 
     computerBoard.appendChild(square);
   }
