@@ -36,6 +36,7 @@ body {
 }
 
 .pc-intro {
+  min-height: 27px;
   text-align: center;
   font-size: 24px;
   color: rgb(1, 16, 4);
@@ -49,6 +50,7 @@ body {
 }
 
 .intro {
+  min-height: 27px;
   text-align: center;
   font-size: 24px;
   color: rgb(1, 16, 4);

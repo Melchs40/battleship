@@ -131,7 +131,6 @@ export default class Gameboard {
             'hit',
             lastSink[Math.floor(Math.random() * lastSink.length)],
             lastPCSink[Math.floor(Math.random() * lastPCSink.length)],
-            lastSink[Math.floor(Math.random() * lastSink.length)],
           ];
         } else if (board[i][2].sunk == true) {
           board[i][2] = 'hit';

@@ -147,6 +147,7 @@ function createPlayerBoard() {
             beginButton.setAttribute('id', 'game-button');
             intro.innerHTML = 'Press the button to begin your offensive.';
             beginButton2 = beginButton;
+            pieceLength = '';
             beginButton.addEventListener('click', () => {
               intro.classList.remove('intro');
               intro.offsetWidth;
@@ -233,6 +234,8 @@ function createComputerBoard() {
           let winButton = document.createElement('div');
           winButton.setAttribute('id', 'win-button');
           winButton.innerHTML = 'Try Again?';
+          intro.offsetWidth;
+          intro.innerHTML = String('  ');
           winButton.addEventListener('click', function beginGame() {
             let playerStuff = document.getElementById('player-board');
             let pcStuff = document.getElementById('computer-board');
@@ -262,8 +265,10 @@ function createComputerBoard() {
           ui.appendChild(win);
           win.appendChild(winText);
           win.appendChild(winButton);
+        } else {
+          intro.innerHTML = response[1];
         }
-        intro.innerHTML = response[1];
+
         intro.classList.remove('intro');
         intro.offsetWidth;
         intro.classList.remove('pc-intro');
@@ -290,6 +295,8 @@ function createComputerBoard() {
             playerSquareArray[second].innerHTML = 'X';
             playerSquareArray[second].id = 'hit';
             if (first.length == 3) {
+              intro.offsetWidth;
+              intro.innerHTML = String('  ');
               let win = document.createElement('div');
               win.setAttribute('id', 'win');
               win.style.display = 'flex';
@@ -338,9 +345,9 @@ function createComputerBoard() {
           }
           intro.classList.add('pc-intro');
           intro.classList.remove('intro');
-        }, 2000);
-      },
-      { once: true }
+        }, 1);
+      }
+      //   { once: true }
     );
 
     computerBoard.appendChild(square);
