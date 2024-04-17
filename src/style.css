@@ -439,4 +439,12 @@ body {
 #win-button {
   border: 1px solid rgb(17, 102, 17);
   padding: 5px;
+}
+
+.used-test {
+  background-color: rgb(25, 150, 25);
+}
+
+.new-test {
+  background-color: white;
 }/*# sourceMappingURL=style.css.map */

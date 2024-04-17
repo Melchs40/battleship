@@ -131,15 +131,21 @@ export default class Gameboard {
             'hit',
             lastSink[Math.floor(Math.random() * lastSink.length)],
             lastPCSink[Math.floor(Math.random() * lastPCSink.length)],
+            true,
           ];
         } else if (board[i][2].sunk == true) {
+          let hitShip = board[i][2];
           board[i][2] = 'hit';
           let sinks = [];
           sinks.push('More of those and this war will be done in no time!');
           sinks.push("Captain, you've sunk one of their ships!");
           sinks.push('Their ship appears to be sunk, sir.');
           sinks.push('This will turn the tide of battle, lets sink another.');
-          return ['hit', sinks[Math.floor(Math.random() * sinks.length)]];
+          return [
+            'hit',
+            sinks[Math.floor(Math.random() * sinks.length)],
+            hitShip.length,
+          ];
         } else board[i][2] = 'hit';
         let hits = [];
         hits.push("I say you've gotten a hit, Captain!");

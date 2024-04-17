@@ -13,6 +13,7 @@ export let pieceLength = 0;
 export let setPiece = false;
 let horizontal = true;
 let beginButton2 = '';
+let randomChance = Math.random() < 0.5;
 
 //create the user interface
 let ui = document.createElement('div');
@@ -129,7 +130,14 @@ function createPlayerBoard() {
             }
           }
           pcMove();
-          console.log(pcUser.game.board);
+          console.log(user.game.board);
+          for (let i = 0; i < user.game.board.length; i++) {
+            if (user.game.board[i][2] !== 'empty') {
+              let activePlayerSquares =
+                document.getElementsByClassName('player-square');
+              activePlayerSquares[i].classList.add('used-test');
+            }
+          }
           let activeClass = document.getElementsByClassName('active');
           while (activeClass.length > 0) {
             let newActive = activeClass[0].cloneNode(true);
@@ -224,7 +232,7 @@ function createComputerBoard() {
           pcUser.game.board[i][0],
           pcUser.game.board[i][1]
         );
-        if (response.length == 3) {
+        if (response.length == 4) {
           let win = document.createElement('div');
           win.setAttribute('id', 'win');
           win.style.display = 'flex';
@@ -241,6 +249,7 @@ function createComputerBoard() {
             let pcStuff = document.getElementById('computer-board');
             let shipStuff = document.getElementById('player-ships');
             let gameButtonBox = document.getElementById('game-button-box');
+            let computerShips = document.getElementById('computer-ships');
             while (playerStuff.children.length > 0) {
               playerStuff.removeChild(playerStuff.firstChild);
               pcStuff.removeChild(pcStuff.firstChild);
@@ -250,6 +259,9 @@ function createComputerBoard() {
             }
             while (gameButtonBox.children.length > 0) {
               gameButtonBox.removeChild(gameButtonBox.firstChild);
+            }
+            for (let eachShip of computerShips.children) {
+              eachShip.classList.remove('new-test');
             }
             playerContainer.removeChild(shipStuff);
             user.startGame();
@@ -267,6 +279,28 @@ function createComputerBoard() {
           win.appendChild(winButton);
         } else {
           intro.innerHTML = response[1];
+          let computerShips = document.getElementById('computer-ships');
+          if (response.length == 3) {
+            if (response[2] == 3) {
+              if (randomChance == true) {
+                let subPiece = document.getElementById('computer-submarine');
+                subPiece.classList.add('new-test');
+              } else {
+                let cruiserPiece = document.getElementById('computer-cruiser');
+                cruiserPiece.classList.add('new-test');
+              }
+              if (randomChance == true) {
+                randomChance = false;
+              } else randomChance = true;
+              console.log(randomChance);
+            } else {
+              for (let eachShip of computerShips.children) {
+                if (eachShip.children.length == response[2]) {
+                  eachShip.classList.add('new-test');
+                }
+              }
+            }
+          }
         }
 
         intro.classList.remove('intro');
@@ -285,8 +319,6 @@ function createComputerBoard() {
         }
         setTimeout(() => {
           let [first, second] = user.takeTurn();
-          console.log(`first- ${first}`);
-          console.log(`second- ${second}`);
           let playerSquare = document.getElementById('player-board').children;
           let playerSquareArray = Array.from(playerSquare);
 
@@ -294,7 +326,7 @@ function createComputerBoard() {
           if (first[0] == 'hit') {
             playerSquareArray[second].innerHTML = 'X';
             playerSquareArray[second].id = 'hit';
-            if (first.length == 3) {
+            if (first.length == 4) {
               intro.offsetWidth;
               intro.innerHTML = String('  ');
               let win = document.createElement('div');
@@ -311,6 +343,7 @@ function createComputerBoard() {
                 let pcStuff = document.getElementById('computer-board');
                 let shipStuff = document.getElementById('player-ships');
                 let gameButtonBox = document.getElementById('game-button-box');
+                let computerShips = document.getElementById('computer-ships');
                 while (playerStuff.children.length > 0) {
                   playerStuff.removeChild(playerStuff.firstChild);
                   pcStuff.removeChild(pcStuff.firstChild);
@@ -320,6 +353,9 @@ function createComputerBoard() {
                 }
                 while (gameButtonBox.children.length > 0) {
                   gameButtonBox.removeChild(gameButtonBox.firstChild);
+                }
+                for (let eachShip of computerShips.children) {
+                  eachShip.classList.remove('new-test');
                 }
                 playerContainer.removeChild(shipStuff);
                 user.startGame();
