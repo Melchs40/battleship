@@ -135,7 +135,7 @@ function createPlayerBoard() {
             if (user.game.board[i][2] !== 'empty') {
               let activePlayerSquares =
                 document.getElementsByClassName('player-square');
-              activePlayerSquares[i].classList.add('used-test');
+              activePlayerSquares[i].classList.add('placed-ship');
             }
           }
           let activeClass = document.getElementsByClassName('active');
@@ -162,6 +162,10 @@ function createPlayerBoard() {
               intro.innerHTML = 'I wish you good luck, sir. Fire away!';
               beginButton.style.display = 'none';
               intro.classList.add('intro');
+              let playerShips = document.getElementsByClassName('ships');
+              for (let i = 0; i <= 5; i++) {
+                playerShips[i].classList.remove('used');
+              }
               let activeSquares =
                 document.getElementsByClassName('computer-square');
               let activePlayerSquares =
@@ -261,7 +265,7 @@ function createComputerBoard() {
               gameButtonBox.removeChild(gameButtonBox.firstChild);
             }
             for (let eachShip of computerShips.children) {
-              eachShip.classList.remove('new-test');
+              eachShip.classList.remove('used');
             }
             playerContainer.removeChild(shipStuff);
             user.startGame();
@@ -284,10 +288,10 @@ function createComputerBoard() {
             if (response[2] == 3) {
               if (randomChance == true) {
                 let subPiece = document.getElementById('computer-submarine');
-                subPiece.classList.add('new-test');
+                subPiece.classList.add('used');
               } else {
                 let cruiserPiece = document.getElementById('computer-cruiser');
-                cruiserPiece.classList.add('new-test');
+                cruiserPiece.classList.add('used');
               }
               if (randomChance == true) {
                 randomChance = false;
@@ -296,7 +300,7 @@ function createComputerBoard() {
             } else {
               for (let eachShip of computerShips.children) {
                 if (eachShip.children.length == response[2]) {
-                  eachShip.classList.add('new-test');
+                  eachShip.classList.add('used');
                 }
               }
             }
@@ -355,7 +359,7 @@ function createComputerBoard() {
                   gameButtonBox.removeChild(gameButtonBox.firstChild);
                 }
                 for (let eachShip of computerShips.children) {
-                  eachShip.classList.remove('new-test');
+                  eachShip.classList.remove('used');
                 }
                 playerContainer.removeChild(shipStuff);
                 user.startGame();
@@ -371,6 +375,30 @@ function createComputerBoard() {
               ui.appendChild(win);
               win.appendChild(winText);
               win.appendChild(winButton);
+            } else {
+              let playerShips = document.getElementById('player-ships');
+              if (first.length == 3) {
+                if (first[2] == 3) {
+                  if (randomChance == true) {
+                    let subPiece = document.getElementById('player-submarine');
+                    subPiece.classList.add('used');
+                  } else {
+                    let cruiserPiece =
+                      document.getElementById('player-cruiser');
+                    cruiserPiece.classList.add('used');
+                  }
+                  if (randomChance == true) {
+                    randomChance = false;
+                  } else randomChance = true;
+                  console.log(randomChance);
+                } else {
+                  for (let eachShip of playerShips.children) {
+                    if (eachShip.children.length == first[2]) {
+                      eachShip.classList.add('used');
+                    }
+                  }
+                }
+              }
             }
           } else playerSquareArray[second].innerHTML = '-';
 
