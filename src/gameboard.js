@@ -132,6 +132,7 @@ export default class Gameboard {
             lastSink[Math.floor(Math.random() * lastSink.length)],
             lastPCSink[Math.floor(Math.random() * lastPCSink.length)],
             true,
+            [x, y],
           ];
         } else if (board[i][2].sunk == true) {
           let hitShip = board[i][2];
@@ -145,14 +146,18 @@ export default class Gameboard {
             'hit',
             sinks[Math.floor(Math.random() * sinks.length)],
             hitShip.length,
+            [x, y],
           ];
-        } else board[i][2] = 'hit';
-        let hits = [];
-        hits.push("I say you've gotten a hit, Captain!");
-        hits.push("Brilliant shot! Let's hit them again!");
-        hits.push("A hit, we've got them on their heels now.");
-        hits.push('Bloody good hit. They must be reeling.');
-        return ['hit', hits[Math.floor(Math.random() * hits.length)]];
+        } else {
+          board[i][2] = 'hit';
+          let hits = [];
+
+          hits.push("I say you've gotten a hit, Captain!");
+          hits.push("Brilliant shot! Let's hit them again!");
+          hits.push("A hit, we've got them on their heels now.");
+          hits.push('Bloody good hit. They must be reeling.');
+          return ['hit', hits[Math.floor(Math.random() * hits.length)], [x, y]];
+        }
       }
     }
   }

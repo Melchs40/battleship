@@ -1,5 +1,12 @@
 import { computerContainer, pieceLength, playerContainer, setPiece } from '.';
 
+function hoverSquares() {
+  const hoverSquares = document.querySelectorAll('.player-square');
+  hoverSquares.forEach((square) => {
+    square.classList.toggle('hover-enabled'); // Add/remove class for hover
+  });
+}
+
 export function createPlayerShips() {
   let playerShips = document.createElement('div');
   playerShips.setAttribute('id', 'player-ships');
@@ -14,12 +21,15 @@ export function createPlayerShips() {
       playerCarrier.classList.remove('used');
       setPiece = false;
       pieceLength = null;
+      hoverSquares();
     } else {
       let activeClass = document.getElementsByClassName('active');
       while (activeClass.length > 0) {
         activeClass[0].classList.remove('active');
+        hoverSquares();
       }
       playerCarrier.classList.add('active');
+      hoverSquares();
       //   playerCarrier.classList.add('used');
       setPiece = true;
       pieceLength = 5;
@@ -42,12 +52,15 @@ export function createPlayerShips() {
       playerBattleship.classList.remove('used');
       setPiece = false;
       pieceLength = null;
+      hoverSquares();
     } else {
       let activeClass = document.getElementsByClassName('active');
       while (activeClass.length > 0) {
         activeClass[0].classList.remove('active');
+        hoverSquares();
       }
       playerBattleship.classList.add('active');
+      hoverSquares();
       //   playerBattleship.classList.add('used');
       setPiece = true;
       pieceLength = 4;
@@ -70,12 +83,15 @@ export function createPlayerShips() {
       playerCruiser.classList.remove('used');
       setPiece = false;
       pieceLength = null;
+      hoverSquares();
     } else {
       let activeClass = document.getElementsByClassName('active');
       while (activeClass.length > 0) {
         activeClass[0].classList.remove('active');
+        hoverSquares();
       }
       playerCruiser.classList.add('active');
+      hoverSquares();
       //   playerCruiser.classList.add('used');
       setPiece = true;
       pieceLength = 3;
@@ -98,12 +114,15 @@ export function createPlayerShips() {
       playerSubmarine.classList.remove('used');
       setPiece = false;
       pieceLength = null;
+      hoverSquares();
     } else {
       let activeClass = document.getElementsByClassName('active');
       while (activeClass.length > 0) {
         activeClass[0].classList.remove('active');
+        hoverSquares();
       }
       playerSubmarine.classList.add('active');
+      hoverSquares();
       //   playerSubmarine.classList.add('used');
       setPiece = true;
       pieceLength = 3;
@@ -126,12 +145,15 @@ export function createPlayerShips() {
       playerDestroyer.classList.remove('used');
       setPiece = false;
       pieceLength = null;
+      hoverSquares();
     } else {
       let activeClass = document.getElementsByClassName('active');
       while (activeClass.length > 0) {
         activeClass[0].classList.remove('active');
+        hoverSquares();
       }
       playerDestroyer.classList.add('active');
+      hoverSquares();
       //   playerDestroyer.classList.add('used');
       setPiece = true;
       pieceLength = 2;

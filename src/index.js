@@ -131,6 +131,11 @@ function createPlayerBoard() {
           }
           pcMove();
           console.log(user.game.board);
+          setPiece = false;
+          const hoverSquares = document.querySelectorAll('.player-square');
+          hoverSquares.forEach((square) => {
+            square.classList.toggle('hover-enabled'); // Add/remove class for hover
+          });
           for (let i = 0; i < user.game.board.length; i++) {
             if (user.game.board[i][2] !== 'empty') {
               let activePlayerSquares =
@@ -236,7 +241,7 @@ function createComputerBoard() {
           pcUser.game.board[i][0],
           pcUser.game.board[i][1]
         );
-        if (response.length == 4) {
+        if (response.length == 5) {
           let win = document.createElement('div');
           win.setAttribute('id', 'win');
           win.style.display = 'flex';
@@ -284,7 +289,7 @@ function createComputerBoard() {
         } else {
           intro.innerHTML = response[1];
           let computerShips = document.getElementById('computer-ships');
-          if (response.length == 3) {
+          if (response.length == 4) {
             if (response[2] == 3) {
               if (randomChance == true) {
                 let subPiece = document.getElementById('computer-submarine');
@@ -322,15 +327,15 @@ function createComputerBoard() {
           activeSquares[i].disabled = true;
         }
         setTimeout(() => {
-          let [first, second] = user.takeTurn();
+          let [attackData, movePosition] = user.takeTurn();
           let playerSquare = document.getElementById('player-board').children;
           let playerSquareArray = Array.from(playerSquare);
 
-          playerSquareArray[second].id = 'miss';
-          if (first[0] == 'hit') {
-            playerSquareArray[second].innerHTML = 'X';
-            playerSquareArray[second].id = 'hit';
-            if (first.length == 4) {
+          playerSquareArray[movePosition].id = 'miss';
+          if (attackData[0] == 'hit') {
+            playerSquareArray[movePosition].innerHTML = 'X';
+            playerSquareArray[movePosition].id = 'hit';
+            if (attackData.length == 5) {
               intro.offsetWidth;
               intro.innerHTML = String('  ');
               let win = document.createElement('div');
@@ -338,7 +343,7 @@ function createComputerBoard() {
               win.style.display = 'flex';
               let winText = document.createElement('div');
               winText.setAttribute('id', 'win-text');
-              winText.innerHTML = first[2];
+              winText.innerHTML = attackData[2];
               let winButton = document.createElement('div');
               winButton.setAttribute('id', 'win-button');
               winButton.innerHTML = 'Try Again?';
@@ -377,8 +382,8 @@ function createComputerBoard() {
               win.appendChild(winButton);
             } else {
               let playerShips = document.getElementById('player-ships');
-              if (first.length == 3) {
-                if (first[2] == 3) {
+              if (attackData.length == 4) {
+                if (attackData[2] == 3) {
                   if (randomChance == true) {
                     let subPiece = document.getElementById('player-submarine');
                     subPiece.classList.add('used');
@@ -393,14 +398,14 @@ function createComputerBoard() {
                   console.log(randomChance);
                 } else {
                   for (let eachShip of playerShips.children) {
-                    if (eachShip.children.length == first[2]) {
+                    if (eachShip.children.length == attackData[2]) {
                       eachShip.classList.add('used');
                     }
                   }
                 }
               }
             }
-          } else playerSquareArray[second].innerHTML = '-';
+          } else playerSquareArray[movePosition].innerHTML = '-';
 
           let activeSquares =
             document.getElementsByClassName('computer-square');
