@@ -391,23 +391,6 @@ body {
     border-color: rgb(17, 102, 17);
   }
 }
-#miss {
-  color: rgb(17, 102, 17);
-  font-family: "Share Tech Mono", monospace;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 20px;
-}
-
-#hit {
-  background-color: rgb(2, 23, 7);
-  color: rgb(17, 102, 17);
-  font-family: "Share Tech Mono", monospace;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 20px;
-}
-
 #win {
   position: absolute;
   display: none;
@@ -420,7 +403,9 @@ body {
           appearance: none;
   border: 1px solid rgb(17, 102, 17);
   background-color: rgb(1, 16, 4);
-  width: 800px;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  padding: 20px;
   height: 200px;
 }
 
@@ -436,6 +421,15 @@ body {
   font-size: 24px;
 }
 
+#win-text {
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  border-right: 0.15em solid transparent; /* The typwriter cursor */
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  letter-spacing: 0.15em; /* Adjust as needed */
+  animation: typing 2s steps(30, end), blink-caret 0.75s step-end infinite;
+}
+
 #win-button {
   border: 1px solid rgb(17, 102, 17);
   padding: 5px;
@@ -443,6 +437,23 @@ body {
 
 .placed-ship {
   background-color: rgb(25, 150, 25);
+}
+
+.miss {
+  color: rgb(17, 102, 17);
+  font-family: "Share Tech Mono", monospace;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 20px;
+}
+
+.hit {
+  background-color: rgb(2, 23, 7);
+  color: rgb(17, 102, 17);
+  font-family: "Share Tech Mono", monospace;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 20px;
 }
 
 .hover-enabled:hover {

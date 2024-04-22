@@ -4,6 +4,7 @@ export default class Gameboard {
   constructor() {
     this.board = null;
     this.lastMove = null;
+    this.checkWin = [];
   }
 
   createBoard() {
@@ -13,7 +14,7 @@ export default class Gameboard {
 
     for (let i = 1; i <= boardSize; i++) {
       for (let j = 1; j <= boardSize; j++) {
-        board.push([i, j, 'empty', k++]);
+        board.push([i, j, 'empty', k++, 'none']);
       }
     }
     this.board = board;
@@ -46,6 +47,7 @@ export default class Gameboard {
             i == board[j][1]
           ) {
             board[j][2] = ship;
+            board[j][4] = 'ship';
           }
         }
       }
@@ -72,6 +74,7 @@ export default class Gameboard {
             y == board[j][1]
           ) {
             board[j][2] = ship;
+            board[j][4] = 'ship';
           }
         }
       }
@@ -87,8 +90,8 @@ export default class Gameboard {
       return 'Cannot fire here, captain!';
     } else console.log([x, y]);
     for (let i = 0; i < board.length; i++) {
-      if (x == board[i][0] && y == board[i][1] && board[i][2] == 'empty') {
-        board[i][2] = 'miss';
+      if (x == board[i][0] && y == board[i][1] && board[i][4] == 'none') {
+        board[i][4] = 'miss';
         let misses = [];
         misses.push('I do believe you missed their ships, sir.');
         misses.push('Miss. We must be getting close to one, Captain.');
@@ -98,21 +101,16 @@ export default class Gameboard {
       } else if (
         x == board[i][0] &&
         y == board[i][1] &&
-        (board[i][2] == 'hit' || board[i][2] == 'miss')
+        (board[i][4] == 'hit' || board[i][4] == 'miss' || board[i][4] == 'sunk')
       ) {
         return 'Cannot fire here, captain!';
       } else if (x == board[i][0] && y == board[i][1]) {
         board[i][2].hit();
         board[i][2].isSunk();
-        let checkWin = [];
-        for (let i = 0; i < board.length; i++) {
-          if (typeof board[i][2] == 'object') {
-            checkWin.push('ship');
-          }
-        }
-        if (checkWin.length == 1) {
-          board[i][2] = 'hit';
-          checkWin = [];
+        this.checkWin.push('hit');
+        if (this.checkWin.length == 17) {
+          board[i][4] = 'hit';
+          this.checkWin = [];
           let lastSink = [];
           lastSink.push(
             "You've sunk their last ship, Captain! The war is over!"
@@ -135,8 +133,13 @@ export default class Gameboard {
             [x, y],
           ];
         } else if (board[i][2].sunk == true) {
+          //   for (let i = 0; i < board.length; i++) {
+          //     if (board[i][2].sunk == true) {
+          //       board[i][4] = 'sunk';
+          //     }
+          //   }
+          board[i][4] = 'hit';
           let hitShip = board[i][2];
-          board[i][2] = 'hit';
           let sinks = [];
           sinks.push('More of those and this war will be done in no time!');
           sinks.push("Captain, you've sunk one of their ships!");
@@ -149,14 +152,22 @@ export default class Gameboard {
             [x, y],
           ];
         } else {
-          board[i][2] = 'hit';
+          let testShip = board[i][2];
+          board[i][4] = 'hit';
           let hits = [];
 
           hits.push("I say you've gotten a hit, Captain!");
           hits.push("Brilliant shot! Let's hit them again!");
           hits.push("A hit, we've got them on their heels now.");
           hits.push('Bloody good hit. They must be reeling.');
-          return ['hit', hits[Math.floor(Math.random() * hits.length)], [x, y]];
+          return [
+            'hit',
+            hits[Math.floor(Math.random() * hits.length)],
+            [x, y],
+            testShip.hits,
+            testShip.sunk,
+            testShip.sunk,
+          ];
         }
       }
     }

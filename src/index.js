@@ -15,6 +15,14 @@ let horizontal = true;
 let beginButton2 = '';
 let randomChance = Math.random() < 0.5;
 
+let storedData = [];
+storedData[1] = [];
+storedData[4] = '';
+let attackData = '';
+let movePosition = '';
+let direction = '';
+let moveToMake = '';
+
 //create the user interface
 let ui = document.createElement('div');
 ui.classList.add('interface');
@@ -87,8 +95,7 @@ function createPlayerBoard() {
       intro.classList.remove('intro');
       intro.offsetWidth;
       intro.classList.add('intro');
-      //   console.log(square.id);
-      //   console.log(user.game.board);
+
       if (setPiece == true && square.id == user.game.board[square.id][3]) {
         intro.innerHTML = user.game.placeShip(
           user.game.board[square.id][0],
@@ -110,7 +117,6 @@ function createPlayerBoard() {
                 pieceLength,
                 true
               );
-              console.log(pcUser.game.lastMove);
               if (move == 'A ship has already been placed here, Captain!') {
                 console.log('repeat');
                 return pcMove();
@@ -130,7 +136,12 @@ function createPlayerBoard() {
             }
           }
           pcMove();
-          console.log(user.game.board);
+          for (let i = 0; i < pcUser.game.board.length; i++) {
+            if (pcUser.game.board[i][2] !== 'empty') {
+              pcUser.game.board[i][4] = 'ship';
+            }
+          }
+          console.log(pcUser.game.board);
           setPiece = false;
           const hoverSquares = document.querySelectorAll('.player-square');
           hoverSquares.forEach((square) => {
@@ -253,12 +264,15 @@ function createComputerBoard() {
           winButton.innerHTML = 'Try Again?';
           intro.offsetWidth;
           intro.innerHTML = String('  ');
+          intro.style.animation = 'none';
+
           winButton.addEventListener('click', function beginGame() {
             let playerStuff = document.getElementById('player-board');
             let pcStuff = document.getElementById('computer-board');
             let shipStuff = document.getElementById('player-ships');
             let gameButtonBox = document.getElementById('game-button-box');
             let computerShips = document.getElementById('computer-ships');
+
             while (playerStuff.children.length > 0) {
               playerStuff.removeChild(playerStuff.firstChild);
               pcStuff.removeChild(pcStuff.firstChild);
@@ -300,8 +314,7 @@ function createComputerBoard() {
               }
               if (randomChance == true) {
                 randomChance = false;
-              } else randomChance = true;
-              console.log(randomChance);
+              } else (randomChance = true), { once: true };
             } else {
               for (let eachShip of computerShips.children) {
                 if (eachShip.children.length == response[2]) {
@@ -317,27 +330,38 @@ function createComputerBoard() {
         intro.classList.remove('pc-intro');
         intro.classList.add('intro');
 
-        square.id = 'miss';
-        if (pcUser.game.board[i][2] == 'hit') {
+        if (pcUser.game.board[i][4] == 'hit') {
           square.innerHTML = 'X';
-          square.id = 'hit';
-        } else square.innerHTML = '-';
+          square.classList.add('hit');
+        } else {
+          square.innerHTML = '-';
+          square.classList.add('miss');
+        }
         let activeSquares = document.getElementsByClassName('computer-square');
         for (let i = 0; i < activeSquares.length; i++) {
           activeSquares[i].disabled = true;
         }
         setTimeout(() => {
-          let [attackData, movePosition] = user.takeTurn();
+          [attackData, movePosition] = user.takeTurn();
           let playerSquare = document.getElementById('player-board').children;
           let playerSquareArray = Array.from(playerSquare);
 
-          playerSquareArray[movePosition].id = 'miss';
           if (attackData[0] == 'hit') {
             playerSquareArray[movePosition].innerHTML = 'X';
-            playerSquareArray[movePosition].id = 'hit';
+            playerSquareArray[movePosition].classList.add('hit');
+
+            for (let i = 0; i < user.game.board.length; i++) {
+              if (user.game.board[i][2].sunk == true) {
+                user.game.board[i][4] = 'sunk';
+                playerSquareArray[i].classList.add('sunk');
+              }
+            }
+            console.log(user.game.board);
+
             if (attackData.length == 5) {
               intro.offsetWidth;
               intro.innerHTML = String('  ');
+              intro.style.animation = 'none';
               let win = document.createElement('div');
               win.setAttribute('id', 'win');
               win.style.display = 'flex';
@@ -395,7 +419,6 @@ function createComputerBoard() {
                   if (randomChance == true) {
                     randomChance = false;
                   } else randomChance = true;
-                  console.log(randomChance);
                 } else {
                   for (let eachShip of playerShips.children) {
                     if (eachShip.children.length == attackData[2]) {
@@ -405,8 +428,10 @@ function createComputerBoard() {
                 }
               }
             }
-          } else playerSquareArray[movePosition].innerHTML = '-';
-
+          } else {
+            playerSquareArray[movePosition].innerHTML = '-';
+            playerSquareArray[movePosition].classList.add('miss');
+          }
           let activeSquares =
             document.getElementsByClassName('computer-square');
           for (let i = 0; i < activeSquares.length; i++) {
@@ -414,9 +439,9 @@ function createComputerBoard() {
           }
           intro.classList.add('pc-intro');
           intro.classList.remove('intro');
-        }, 1);
-      }
-      //   { once: true }
+        }, 2000);
+      },
+      { once: true }
     );
 
     computerBoard.appendChild(square);
