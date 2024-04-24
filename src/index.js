@@ -72,6 +72,7 @@ startButton.addEventListener('click', function beginGame() {
   vLine.classList.add('mobile');
   hLine.classList.add('mobile');
   moveLine.classList.add('mobile');
+  console.log(`Init random- ${randomChance}`);
 });
 
 let gameBoards = document.createElement('div');
@@ -322,7 +323,10 @@ function createComputerBoard() {
               }
               if (randomChance == true) {
                 randomChance = false;
-              } else (randomChance = true), { once: true };
+                console.log(`f to t ${randomChance}`);
+              } else {
+                (randomChance = true), console.log(`t to f ${randomChance}`);
+              }
             } else {
               for (let eachShip of computerShips.children) {
                 if (eachShip.children.length == response[2]) {

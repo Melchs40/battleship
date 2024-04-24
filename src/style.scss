@@ -602,4 +602,14 @@ body {
     bottom: 0;
     position: relative;
   }
+
+  .square {
+    height: 10%;
+    width: 10%;
+    overflow: hidden;
+    border: 1px solid $lightGreen;
+    background-color: $backgroundGreen;
+    color: $lightGreen;
+    padding: 0px;
+  }
 }
