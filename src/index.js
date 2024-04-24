@@ -317,16 +317,18 @@ function createComputerBoard() {
               if (randomChance == true) {
                 let subPiece = document.getElementById('computer-submarine');
                 subPiece.classList.add('used');
+                randomChance = false;
               } else {
                 let cruiserPiece = document.getElementById('computer-cruiser');
                 cruiserPiece.classList.add('used');
+                randomChance = true;
               }
-              if (randomChance == true) {
-                randomChance = false;
-                console.log(`f to t ${randomChance}`);
-              } else {
-                (randomChance = true), console.log(`t to f ${randomChance}`);
-              }
+              // if (randomChance == true) {
+              //   randomChance = false;
+              //   console.log(`f to t ${randomChance}`);
+              // } else {
+              //   (randomChance = true), console.log(`t to f ${randomChance}`);
+              // }
             } else {
               for (let eachShip of computerShips.children) {
                 if (eachShip.children.length == response[2]) {

@@ -582,4 +582,29 @@ body {
     bottom: 0;
     position: relative;
   }
+  #win {
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    z-index: 5;
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    border: 1px solid rgb(17, 102, 17);
+    background-color: rgb(1, 16, 4);
+    max-width: 80vw;
+    padding: 20px;
+    top: 50%;
+    height: 200px;
+  }
+  #win-text {
+    overflow: hidden; /* Ensures the content is not revealed until the animation */
+    white-space: unset;
+    text-align: center;
+    margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+    letter-spacing: 0.15em; /* Adjust as needed */
+    animation: none;
+  }
 }/*# sourceMappingURL=style.css.map */
