@@ -600,4 +600,12 @@ body {
     bottom: 0;
     position: relative;
   }
+
+  .square {
+    height: 32px;
+    width: 32px;
+    border: 1px solid $lightGreen;
+    background-color: $backgroundGreen;
+    color: $lightGreen;
+  }
 }

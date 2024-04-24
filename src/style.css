@@ -580,4 +580,11 @@ body {
     bottom: 0;
     position: relative;
   }
+  .square {
+    height: 32px;
+    width: 32px;
+    border: 1px solid rgb(17, 102, 17);
+    background-color: rgb(1, 16, 4);
+    color: rgb(17, 102, 17);
+  }
 }/*# sourceMappingURL=style.css.map */
