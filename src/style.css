@@ -174,8 +174,9 @@ body {
 }
 
 .square {
-  height: 32px;
-  width: 32px;
+  height: 10%;
+  width: 10%;
+  overflow: hidden;
   border: 1px solid rgb(17, 102, 17);
   background-color: rgb(1, 16, 4);
   color: rgb(17, 102, 17);
@@ -579,13 +580,5 @@ body {
     padding: 0;
     bottom: 0;
     position: relative;
-  }
-  .square {
-    max-height: 32px;
-    max-width: 32px;
-    overflow: hidden;
-    border: 1px solid rgb(17, 102, 17);
-    background-color: rgb(1, 16, 4);
-    color: rgb(17, 102, 17);
   }
 }/*# sourceMappingURL=style.css.map */
