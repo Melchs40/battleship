@@ -604,6 +604,7 @@ body {
   .square {
     max-height: 32px;
     max-width: 32px;
+    overflow: hidden;
     border: 1px solid $lightGreen;
     background-color: $backgroundGreen;
     color: $lightGreen;
