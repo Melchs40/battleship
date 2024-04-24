@@ -1,13 +1,17 @@
+$lightGreen: rgb(17, 102, 17);
+
+$backgroundGreen: rgb(1, 16, 4);
+
 body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   margin: 0;
   font-family: 'Share Tech Mono', monospace;
   font-weight: 400;
   font-style: normal;
+  background-color: $backgroundGreen;
 }
-
-$lightGreen: rgb(17, 102, 17);
-
-$backgroundGreen: rgb(1, 16, 4);
 
 .interface {
   position: absolute;
@@ -18,6 +22,7 @@ $backgroundGreen: rgb(1, 16, 4);
   align-items: center;
   height: 100vh;
   width: 100vw;
+  min-width: 800px;
 }
 
 .ui {
@@ -117,6 +122,7 @@ $backgroundGreen: rgb(1, 16, 4);
   width: 100vw;
   display: flex;
   justify-content: space-around;
+  min-width: 800px;
 }
 
 .containers {
@@ -247,6 +253,7 @@ $backgroundGreen: rgb(1, 16, 4);
   width: 100vw;
   background-color: $backgroundGreen;
   z-index: -1;
+  min-width: 800px;
 }
 
 #first {
@@ -468,4 +475,129 @@ $backgroundGreen: rgb(1, 16, 4);
 
 .hover-enabled:hover {
   background-color: rgb(25, 150, 25);
+}
+
+.footer {
+  color: $lightGreen;
+  margin-top: auto;
+  width: 100%;
+  height: 1.5rem;
+  text-align: center;
+}
+
+@media only screen and (max-device-width: 700px) {
+  .interface {
+    position: absolute;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: start;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    min-width: unset;
+  }
+
+  .background {
+    min-width: unset;
+  }
+  #title {
+    animation: glow 3s linear infinite;
+  }
+
+  @keyframes glow {
+    0% {
+      text-shadow: 0 0 0cqmax $lightGreen;
+    }
+    50% {
+      text-shadow: 0 0 5px rgb(25, 150, 25);
+    }
+
+    100% {
+      text-shadow: 0 0 0px $lightGreen;
+    }
+  }
+
+  #first.mobile,
+  #second.mobile,
+  #third.mobile,
+  #fourth.mobile,
+  #fifth.mobile,
+  #move-line.mobile,
+  #v-line.mobile,
+  #h-line.mobile {
+    animation: none;
+    display: none;
+  }
+
+  .intro-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+  }
+
+  .intro,
+  .pc-intro {
+    font-size: 1em;
+    height: fit-content;
+    align-self: center;
+    justify-self: center;
+    text-align: center;
+    text-wrap: wrap;
+    font-size: 1em;
+    color: $backgroundGreen;
+    background-color: $lightGreen;
+    animation: none;
+  }
+
+  #input-name {
+    width: 4em;
+  }
+
+  #game-container {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    padding-top: 0px;
+    height: unset;
+    min-width: unset;
+  }
+
+  #game-button-box {
+    min-height: 32px;
+    display: flex;
+    width: 100vw;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  #player-name,
+  #computer-name {
+    min-width: 90%;
+    text-wrap: nowrap;
+    text-align: center;
+  }
+  body {
+    background-color: $backgroundGreen;
+    min-width: unset;
+  }
+
+  .footer {
+    color: $lightGreen;
+    font-size: 12px;
+    width: 100%;
+    height: 1.5rem;
+    text-align: center;
+    width: 100%;
+    padding: 0;
+    bottom: 0;
+    position: relative;
+  }
 }

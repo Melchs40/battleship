@@ -64,6 +64,14 @@ startButton.addEventListener('click', function beginGame() {
   pcUser = player2;
   intro.innerHTML = 'Place your ships on the grid to the left';
   intro.classList.add('intro');
+  firstCircle.classList.add('mobile');
+  secondCircle.classList.add('mobile');
+  thirdCircle.classList.add('mobile');
+  fourthCircle.classList.add('mobile');
+  fifthCircle.classList.add('mobile');
+  vLine.classList.add('mobile');
+  hLine.classList.add('mobile');
+  moveLine.classList.add('mobile');
 });
 
 let gameBoards = document.createElement('div');
@@ -448,6 +456,10 @@ function createComputerBoard() {
   }
 }
 
+let footer = document.createElement('div');
+footer.classList.add('footer');
+footer.innerHTML = "Copyright © Melchs40's Computer Whiz Coding 2024";
+
 content.appendChild(ui);
 ui.appendChild(title);
 ui.appendChild(introContainer);
@@ -500,3 +512,5 @@ fourthCircle.appendChild(fifthCircle);
 firstCircle.appendChild(vLine);
 firstCircle.appendChild(hLine);
 firstCircle.appendChild(moveLine);
+
+ui.appendChild(footer);
