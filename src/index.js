@@ -14,6 +14,7 @@ export let setPiece = false;
 let horizontal = true;
 let beginButton2 = '';
 let randomChance = Math.random() < 0.5;
+let pcRandomChance = Math.random() < 0.5;
 
 let storedData = [];
 storedData[1] = [];
@@ -305,6 +306,8 @@ function createComputerBoard() {
             intro.innerHTML = 'Place your ships on the grid to the left';
             intro.classList.add('intro');
             win.style.display = 'none';
+            intro.style.animation =
+              'typing 2s steps(30, end), blink-caret 0.75s step-end infinite';
           });
           ui.appendChild(win);
           win.appendChild(winText);
@@ -314,21 +317,16 @@ function createComputerBoard() {
           let computerShips = document.getElementById('computer-ships');
           if (response.length == 4) {
             if (response[2] == 3) {
-              if (randomChance == true) {
+              if (pcRandomChance == true) {
                 let subPiece = document.getElementById('computer-submarine');
                 subPiece.classList.add('used');
-                randomChance = false;
               } else {
                 let cruiserPiece = document.getElementById('computer-cruiser');
                 cruiserPiece.classList.add('used');
-                randomChance = true;
               }
-              // if (randomChance == true) {
-              //   randomChance = false;
-              //   console.log(`f to t ${randomChance}`);
-              // } else {
-              //   (randomChance = true), console.log(`t to f ${randomChance}`);
-              // }
+              if (pcRandomChance == true) {
+                pcRandomChance = false;
+              } else pcRandomChance = true;
             } else {
               for (let eachShip of computerShips.children) {
                 if (eachShip.children.length == response[2]) {
@@ -413,6 +411,8 @@ function createComputerBoard() {
                 gameButtonBox.appendChild(newBtn);
                 intro.innerHTML = 'Place your ships on the grid to the left';
                 intro.classList.add('intro');
+                intro.style.display =
+                  'typing 2s steps(30, end), blink-caret 0.75s step-end infinite;';
                 win.style.display = 'none';
               });
               ui.appendChild(win);
